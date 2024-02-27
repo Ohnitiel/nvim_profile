@@ -11,8 +11,8 @@ vim.keymap.set("n", "<leader>gc", telescope.git_commits, {})
 vim.keymap.set("n", "<leader>gs", telescope.git_stash, {})
 
 -- LSP maps
-vim.keymap.set("n", "gr", function() telescope.lps_references() end)
-vim.keymap.set("n", "gi", function() telescope.lps_implementations() end)
+vim.keymap.set("n", "gr", function() telescope.lsp_references() end)
+vim.keymap.set("n", "gi", function() telescope.lsp_implementations() end)
 vim.keymap.set("n", "<leader>qf", telescope.quickfix, {})
 vim.keymap.set("n", "<leader>D", telescope.diagnostics, {})
 vim.keymap.set("n", "<leader>d", function()
