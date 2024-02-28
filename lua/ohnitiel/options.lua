@@ -11,7 +11,7 @@ vim.opt.relativenumber = true;
 vim.opt.number = true;
 
 
-vim.opt.timeoutlen = 500;
+vim.opt.timeoutlen = 250;
 
 -- Mark column 80
 vim.opt.colorcolumn = "80";

@@ -1,5 +1,5 @@
 vim.g.mapleader = " "
-vim.keymap.set("n", "<leader><Esc>", vim.cmd.Ex)
+vim.keymap.set("n", "<leader><Esc>", vim.cmd.Ex, {desc="Open Netrw"})
 
 vim.keymap.set("v", "J", ":m '>+1<CR>gv=gv")
 vim.keymap.set("v", "K", ":m '<-2<CR>gv=gv")
@@ -11,11 +11,11 @@ vim.keymap.set("n", "<C-u>", "<C-u>zz")
 vim.keymap.set("n", "N", "Nzzzv")
 vim.keymap.set("n", "n", "nzzzv")
 
-vim.keymap.set({ "n", "v" }, "<leader>y", [["+y]])
-vim.keymap.set("n", "<leader>Y", [[gg0VG$"+y]])
+vim.keymap.set({ "n", "v" }, "<leader>y", [["+y]], {desc="Copy selection"})
+vim.keymap.set("n", "<leader>Y", [[gg0VG$"+y]], {desc="Copy entire buffer"})
 vim.keymap.set("n", "<leader>[", [[^]])
 
-vim.keymap.set("n", "<leader>w", vim.cmd.write)
-vim.keymap.set("n", "<leader>q", vim.cmd.quit)
-vim.keymap.set("n", "<leader>qa", vim.cmd.quitall)
+vim.keymap.set("n", "<leader>w", vim.cmd.write, {desc="Save buffer"})
+vim.keymap.set("n", "<leader>x", vim.cmd.quit, {desc="Quit Nvim"})
+vim.keymap.set("n", "<leader>qa", vim.cmd.quitall, {desc="Quit All Nvim"})
 
