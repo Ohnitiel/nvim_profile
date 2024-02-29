@@ -1,5 +1,9 @@
 return {
 
+    "simrat39/symbols-outline.nvim",
+    "mbbill/undotree",
+    "lewis6991/gitsigns.nvim",
+
     {
         "EdenEast/nightfox.nvim",
         config = function()
@@ -19,12 +23,10 @@ return {
     {
         "folke/which-key.nvim",
         event = "VeryLazy",
-        config = function ()
+        config = function()
             require("which-key").setup({})
         end
     },
-    "mbbill/undotree",
-    "lewis6991/gitsigns.nvim",
 
     {
         "ThePrimeagen/harpoon",
