@@ -3,6 +3,16 @@ return {
     "lewis6991/gitsigns.nvim",
 
     {
+        "simrat39/symbols-outline.nvim",
+        config = function()
+            require("symbols-outline").setup({})
+            vim.keymap.set("n", "<leader><leader>", function()
+                vim.cmd("SymbolsOutline")
+            end, { desc = "Toggle symbols sidebar" })
+        end
+    },
+
+    {
         "mbbill/undotree",
         config = function()
             vim.keymap.set('n', '<leader>u', vim.cmd.UndotreeToggle)
@@ -42,8 +52,8 @@ return {
                 accept_keymap = "<C-[>",
                 dismiss_keymap = "<C-]>",
                 debounce_ms = 650,
-                suggestion_color = {gui = "#808080", cterm = 244},
-                exclude_filetypes = {"TelescopePrompt", "NvimTree"},
+                suggestion_color = { gui = "#808080", cterm = 244 },
+                exclude_filetypes = { "TelescopePrompt", "NvimTree" },
                 log_file_path = nil,
             })
         end
