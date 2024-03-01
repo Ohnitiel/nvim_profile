@@ -20,10 +20,13 @@ return {
         vim.keymap.set("n", "<A-4>", function() harpoon:list():select(4) end, { desc = "Go to Harpoon 4" })
 
         local conf = require("telescope.config").values
+        local get_root_dir = function() return vim.loop.cwd() end
         local function toggle_telescope(harpoon_files)
             local file_paths = {}
+            local root_dir = string.gsub(get_root_dir().."\\", "\\", "/")
             for _, item in ipairs(harpoon_files.items) do
-                table.insert(file_paths, item.value)
+                local str = string.gsub(item.value, root_dir, "")
+                table.insert(file_paths, str)
             end
 
             require("telescope.pickers").new({}, {
@@ -36,10 +39,10 @@ return {
             }):find()
         end
 
-        vim.keymap.set("n", "<leader>	", function()
-            harpoon.ui:toggle_quick_menu(harpoon:list())
-        end)
-        -- vim.keymap.set("n", "<leader>	", function() toggle_telescope(harpoon:list()) end,
-        -- 	{desc = "Open Harpoon window" })
+        -- vim.keymap.set("n", "<leader>	", function()
+        --     harpoon.ui:toggle_quick_menu(harpoon:list())
+        -- end)
+        vim.keymap.set("n", "<leader>	", function() toggle_telescope(harpoon:list()) end,
+        	{desc = "Open Harpoon window" })
     end
 }
