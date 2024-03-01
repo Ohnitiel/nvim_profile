@@ -1,8 +1,13 @@
 return {
 
-    "simrat39/symbols-outline.nvim",
-    "mbbill/undotree",
     "lewis6991/gitsigns.nvim",
+
+    {
+        "mbbill/undotree",
+        config = function()
+            vim.keymap.set('n', '<leader>u', vim.cmd.UndotreeToggle)
+        end
+    },
 
     {
         "EdenEast/nightfox.nvim",
@@ -29,25 +34,19 @@ return {
     },
 
     {
-        "ThePrimeagen/harpoon",
-        branch = "harpoon2",
-        dependencies = {
-            "nvim-lua/plenary.nvim",
-            "nvim-telescope/telescope.nvim"
-        }
-    },
-
-    {
-        "VonHeikemen/lsp-zero.nvim",
-        branch = "v3.x",
-        dependencies = {
-            "williamboman/mason.nvim",
-            "williamboman/mason-lspconfig.nvim",
-            "neovim/nvim-lspconfig",
-            "hrsh7th/cmp-nvim-lsp",
-            "hrsh7th/nvim-cmp",
-            "L3MON4D3/LuaSnip",
-        }
+        "codota/tabnine-nvim",
+        build = "pwsh.exe -file .\\dl_binaries.ps1",
+        config = function()
+            require("tabnine").setup({
+                disable_auto_comment = true,
+                accept_keymap = "<C-[>",
+                dismiss_keymap = "<C-]>",
+                debounce_ms = 650,
+                suggestion_color = {gui = "#808080", cterm = 244},
+                exclude_filetypes = {"TelescopePrompt", "NvimTree"},
+                log_file_path = nil,
+            })
+        end
     },
 
     {
