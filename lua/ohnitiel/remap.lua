@@ -1,8 +1,8 @@
 vim.g.mapleader = " "
 vim.keymap.set("n", "<leader><Esc>", vim.cmd.Ex, {desc="Open Netrw"})
 
-vim.keymap.set("v", "J", ":m '>+1<CR>gv=gv")
-vim.keymap.set("v", "K", ":m '<-2<CR>gv=gv")
+vim.keymap.set("v", "J", ":m '>+1<CR>gv=gv", {desc="Move selection down"})
+vim.keymap.set("v", "K", ":m '<-2<CR>gv=gv", {desc="Move selection up"})
 
 -- Center screen on cursor when moving pages or searching
 vim.keymap.set("n", "J", "mzJ`z")

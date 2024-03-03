@@ -15,4 +15,7 @@ if not vim.loop.fs_stat(lazypath) then
 end
 vim.opt.rtp:prepend(lazypath)
 
-require("lazy").setup("ohnitiel/plugins")
+require("lazy").setup({
+    spec = "ohnitiel/plugins",
+    change_detection = { notify = false },
+})
