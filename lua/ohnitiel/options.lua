@@ -16,3 +16,7 @@ vim.opt.timeoutlen = 250;
 -- Mark column 80
 vim.opt.colorcolumn = "80";
 vim.opt.cursorcolumn = true;
+
+
+-- No need with lsp_lines
+vim.diagnostic.config({ virtual_text = false, })
