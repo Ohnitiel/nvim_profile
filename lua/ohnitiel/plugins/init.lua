@@ -83,7 +83,7 @@ return {
         end
     },
 
-    {
+    --[[{
         "codota/tabnine-nvim",
         build = "pwsh.exe -file .\\dl_binaries.ps1",
         config = function()
@@ -96,6 +96,17 @@ return {
                 exclude_filetypes = { "TelescopePrompt", "NvimTree" },
                 log_file_path = nil,
             })
+        end
+    }, ]]--
+
+    {
+        "Exafunction/codeium.nvim",
+        dependecies = {
+            "nvim-lua/plenary.nvim",
+            "hrsh7th/nvim-cmp",
+        },
+        config = function()
+            require("codeium").setup({})
         end
     },
 
