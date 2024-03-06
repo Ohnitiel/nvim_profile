@@ -1,6 +1,9 @@
 return {
     "nvim-telescope/telescope.nvim",
     config = function()
+        require("telescope").setup({
+            preview = { filesize_limit = 2 },
+        })
         local telescope = require("telescope.builtin")
 
         -- Files maps
