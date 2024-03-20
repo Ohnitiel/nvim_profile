@@ -12,6 +12,10 @@ return {
         vim.keymap.set("n", "<leader>fb", telescope.buffers, { desc = "Telescope list buffers" })
 
         -- Git maps
+        vim.keymap.set("n", "<leader>gw", telescope.grep_string, { desc = "Telescope git files" })
+        vim.keymap.set("n", "<leader>gW", function()
+        telescope.grep_string({ search = vim.fn.expand("<cWORD>") })
+        end, { desc = "Telescope git files" })
         vim.keymap.set("n", "<leader>gf", telescope.git_files, { desc = "Telescope git files" })
         vim.keymap.set("n", "<leader>gc", telescope.git_commits, { desc = "Telescope git commits" })
         vim.keymap.set("n", "<leader>gs", telescope.git_stash, { desc = "Telescope git search" })

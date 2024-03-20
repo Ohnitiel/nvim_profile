@@ -83,22 +83,6 @@ return {
         end
     },
 
-    --[[{
-        "codota/tabnine-nvim",
-        build = "pwsh.exe -file .\\dl_binaries.ps1",
-        config = function()
-            require("tabnine").setup({
-                disable_auto_comment = true,
-                accept_keymap = "<C-[>",
-                dismiss_keymap = "<C-]>",
-                debounce_ms = 650,
-                suggestion_color = { gui = "#808080", cterm = 244 },
-                exclude_filetypes = { "TelescopePrompt", "NvimTree" },
-                log_file_path = nil,
-            })
-        end
-    }, ]]--
-
     {
         "Exafunction/codeium.nvim",
         dependecies = {
@@ -106,7 +90,9 @@ return {
             "hrsh7th/nvim-cmp",
         },
         config = function()
-            require("codeium").setup({})
+            require("codeium").setup({
+                config_path = os.getenv("HOME") .. "/.config/codeium/config.json"
+            })
         end
     },
 
@@ -122,10 +108,20 @@ return {
                     "json", "php", "python", "scss", "sql", "toml",
                     "javascript", "yaml", "dockerfile",
                 },
-                sync_installed = false,
-                highlight = { enable = true },
+                sync_install = false,
+                highlight = {
+                    enable = true,
+                    disable = function(lang, buf)
+                        local max_filesize = 5 * 1024 * 1024 -- 5MB
+                        local ok, stats = pcall(vim.loop.fs_stat, vim.api.nvim_buf_get_name(buf))
+                        if ok and stats and stats.size > max_filesize then
+                            return true
+                        end
+                    end
+                },
                 indent = { enable = true },
                 auto_install = false,
+                ignore_install = {},
             })
         end
     },
