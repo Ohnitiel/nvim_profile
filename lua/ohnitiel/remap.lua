@@ -1,5 +1,6 @@
 vim.g.mapleader = " "
 vim.keymap.set("n", "<leader><Esc>", vim.cmd.Ex, { desc = "Open Netrw" })
+vim.keymap.set("n", "<leader>'", vim.cmd.Ex, { desc = "Open Netrw" })
 
 vim.keymap.set("v", "J", ":m '>+1<CR>gv=gv", { desc = "Move selection down" })
 vim.keymap.set("v", "K", ":m '<-2<CR>gv=gv", { desc = "Move selection up" })
@@ -14,12 +15,18 @@ vim.keymap.set("n", "}", "}zzzv")
 vim.keymap.set("n", "{", "{zzzv")
 vim.keymap.set("n", "[m", "[mzzzv")
 vim.keymap.set("n", "]m", "]mzzzv")
+vim.keymap.set("n", "[M", "[Mzzzv")
+vim.keymap.set("n", "]M", "]Mzzzv")
 
+-- Copy and yank related stuff
 vim.keymap.set("v", "<leader>y", [["+y]], { desc = "Copy selection" })
 vim.keymap.set("n", "<leader>Y", [[gg0VG$"+y]], { desc = "Copy entire buffer" })
-vim.keymap.set("n", "<leader>[", [[^]])
+vim.keymap.set("x", "<leader>p", [["_dP]], { desc = "Put without yank" })
 
+vim.keymap.set("n", "<leader>s", [[:%s/\<<C-r><C-w>\>/<C-r><C-w>/gI<Left><Left><Left>]])
+
+vim.keymap.set("n", "<leader>[", [[^]], { desc = "Begin of line" })
 vim.keymap.set("n", "<leader>w", vim.cmd.write, { desc = "Save buffer" })
-vim.keymap.set("n", "<leader>sa", vim.cmd.writeall, { desc = "Save all buffers" })
+vim.keymap.set("n", "<leader>W", vim.cmd.wall, { desc = "Save all buffers" })
 vim.keymap.set("n", "<leader>x", vim.cmd.quit, { desc = "Quit Nvim" })
-vim.keymap.set("n", "<leader>qa", vim.cmd.quitall, { desc = "Quit All Nvim" })
+vim.keymap.set("n", "<leader>X", vim.cmd.quitall, { desc = "Quit All Nvim" })
