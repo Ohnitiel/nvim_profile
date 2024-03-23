@@ -46,6 +46,11 @@ return {
                 "pyright",
                 "lua_ls",
                 "intelephense",
+                "angularls",
+                "tsserver",
+                "sqls",
+                "bashls",
+                "prettierd",
             },
             handlers = handlers,
         })
