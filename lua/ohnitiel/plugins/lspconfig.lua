@@ -48,9 +48,7 @@ return {
                 "intelephense",
                 "angularls",
                 "tsserver",
-                "sqls",
                 "bashls",
-                "prettierd",
             },
             handlers = handlers,
         })

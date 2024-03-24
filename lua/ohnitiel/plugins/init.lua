@@ -1,6 +1,38 @@
 return {
 
     {
+        "neogitOrg/neogit",
+        dependencies = {
+            "nvim-lua/plenary.nvim",
+            "sindrets/diffview.nvim",
+            "nvim-telescope/telescope.nvim"
+        },
+        config = true
+    },
+
+    {
+        "folke/noice.nvim",
+        event = "VeryLazy",
+        dependencies = {
+            "MunifTanjim/nui.nvim",
+            "rcarriga/nvim-notify",
+            "nvim-treesitter/nvim-treesitter",
+            "hrsh7th/nvim-cmp"
+        },
+        config = function()
+            require("noice").setup({
+                lsp = {
+                    override = {
+                        ["vim.lsp.util.convert_input_to_markdown_lines"] = true,
+                        ["vim.lsp.util.stylize_markdown"] = true,
+                        ["cmp.entry.get_documentation"] = true,
+                    }
+                }
+            })
+        end
+    },
+
+    {
         "roobert/surround-ui.nvim",
         dependencies = {
             "kylechui/nvim-surround",
@@ -97,7 +129,7 @@ return {
                 ensure_installed = {
                     "lua", "typescript", "html", "bash", "css",
                     "json", "php", "python", "scss", "sql", "toml",
-                    "javascript", "yaml", "dockerfile",
+                    "javascript", "yaml", "dockerfile", "vimdoc"
                 },
                 sync_install = false,
                 highlight = {
@@ -108,7 +140,8 @@ return {
                         if ok and stats and stats.size > max_filesize then
                             return true
                         end
-                    end
+                    end,
+                    additional_vim_regex_highlighting = false,
                 },
                 indent = { enable = true },
                 auto_install = false,
