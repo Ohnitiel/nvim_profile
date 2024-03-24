@@ -1,25 +1,4 @@
 return {
-
-    {
-        "tpope/vim-dadbod",
-        dependencies = {
-            "kristijanhusak/vim-dadbod-completion",
-            "kristijanhusak/vim-dadbod-ui"
-        },
-        config = function()
-            require("config.dadbod").setup()
-        end,
-    },
-    {
-        "neogitOrg/neogit",
-        dependencies = {
-            "nvim-lua/plenary.nvim",
-            "sindrets/diffview.nvim",
-            "nvim-telescope/telescope.nvim"
-        },
-        config = true
-    },
-
     {
         "folke/noice.nvim",
         event = "VeryLazy",
