@@ -24,6 +24,7 @@ vim.keymap.set("n", "<leader>Y", [[gg0VG$"+y]], { desc = "Copy entire buffer" })
 vim.keymap.set("x", "<leader>p", [["_dP]], { desc = "Put without yank" })
 
 vim.keymap.set("n", "<leader>s", [[:%s/\<<C-r><C-w>\>/<C-r><C-w>/gI<Left><Left><Left>]])
+vim.keymap.set("n", "<leader>S", [[:%s/\<<C-r><C-W>\>/<C-r><C-W>/gI<Left><Left><Left>]])
 
 vim.keymap.set("n", "<leader>[", [[^]], { desc = "Begin of line" })
 vim.keymap.set("n", "<leader>w", vim.cmd.write, { desc = "Save buffer" })

@@ -32,6 +32,17 @@ return {
     },
 
     {
+        "nanotee/sqls.nvim",
+        config = function()
+            require("lspconfig").sqls.setup({
+                on_attach = function(client, bufnr)
+                    require("sqls").on_attach(client, bufnr)
+                end
+            })
+        end
+    },
+
+    {
         "EdenEast/nightfox.nvim",
         config = function()
             vim.cmd.colorscheme('carbonfox')
@@ -57,7 +68,7 @@ return {
 
     {
         "Exafunction/codeium.nvim",
-        dependecies = {
+        dependencies = {
             "nvim-lua/plenary.nvim",
             "hrsh7th/nvim-cmp",
         },
