@@ -1,4 +1,7 @@
 return {
+
+    { "ellisonleao/dotenv.nvim", config = true },
+
     {
         "folke/noice.nvim",
         event = "VeryLazy",
