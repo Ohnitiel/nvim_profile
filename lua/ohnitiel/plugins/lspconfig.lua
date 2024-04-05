@@ -14,7 +14,9 @@ return {
         local lspconfig = require("lspconfig")
         local handlers = {
             function(server_name) -- default handler (optional)
-                lspconfig[server_name].setup({})
+                lspconfig[server_name].setup({
+                    capabilities = capabilities
+                })
             end,
 
             ["lua_ls"] = function()
@@ -24,18 +26,6 @@ return {
                             completion = { callSnippet = "Replace" }
                         }
                     },
-                    capabilities = capabilities
-                })
-            end,
-
-            ["intelephense"] = function()
-                lspconfig.intelephense.setup({
-                    capabilities = capabilities
-                })
-            end,
-
-            ["pyright"] = function()
-                lspconfig.pyright.setup({
                     capabilities = capabilities
                 })
             end,
