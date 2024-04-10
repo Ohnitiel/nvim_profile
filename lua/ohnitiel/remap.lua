@@ -31,3 +31,7 @@ vim.keymap.set("n", "<leader>w", vim.cmd.write, { desc = "Save buffer" })
 vim.keymap.set("n", "<leader>W", vim.cmd.wall, { desc = "Save all buffers" })
 vim.keymap.set("n", "<leader>x", vim.cmd.quit, { desc = "Quit Nvim" })
 vim.keymap.set("n", "<leader>X", vim.cmd.quitall, { desc = "Quit All Nvim" })
+
+vim.keymap.set("i", "<C-R>d", function()
+     return os.date("%c")
+end, { desc = "Insert current date", expr = true})
