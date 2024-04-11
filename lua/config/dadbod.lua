@@ -26,6 +26,14 @@ function M.setup()
             end
         }
     )
+
+    vim.api.nvim_create_autocmd(
+        "FileType",
+        {
+            pattern = { "sql", "pgsql" },
+            command = [[DBUIFindBuffer]]
+        }
+    )
 end
 
 return M
