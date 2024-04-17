@@ -108,7 +108,8 @@ return {
                 ensure_installed = {
                     "lua", "typescript", "html", "bash", "css",
                     "json", "php", "python", "scss", "sql", "toml",
-                    "javascript", "yaml", "dockerfile", "vimdoc"
+                    "javascript", "yaml", "dockerfile", "vimdoc",
+                    "hurl"
                 },
                 sync_install = false,
                 highlight = {

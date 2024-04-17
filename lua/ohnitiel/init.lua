@@ -1,5 +1,6 @@
 require("ohnitiel.remap")
 require("ohnitiel.options")
+require("ohnitiel.hurl")
 print("Hello Ohnitiel")
 
 local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
