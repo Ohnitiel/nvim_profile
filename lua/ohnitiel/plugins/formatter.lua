@@ -6,7 +6,7 @@ return {
                 lua = { "stylua" },
                 javascript = { "prettierd" },
                 typescript = { "prettierd" },
-                sql = { "sql-formatter" },
+                sql = { "sqlfmt" },
                 json = { "jq" },
             }
         })
