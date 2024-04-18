@@ -17,7 +17,7 @@ return {
                     "prettierd", "--parser", "html",
                 },
             },
-            env_file = { "vars.env" }
+            env_file = { "requests.env" }
         })
     end
 }
