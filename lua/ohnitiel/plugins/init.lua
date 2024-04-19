@@ -102,9 +102,7 @@ return {
         "nvim-treesitter/nvim-treesitter",
         build = ":TSUpdate",
         config = function()
-            local configs = require("nvim-treesitter.configs")
-
-            configs.setup({
+            require("nvim-treesitter.configs").setup({
                 ensure_installed = {
                     "lua", "typescript", "html", "bash", "css",
                     "json", "php", "python", "scss", "sql", "toml",
@@ -114,7 +112,7 @@ return {
                 sync_install = false,
                 highlight = {
                     enable = true,
-                    disable = function(lang, buf)
+                    disable = function(_, buf)
                         local max_filesize = 5 * 1024 * 1024 -- 5MB
                         local ok, stats = pcall(vim.loop.fs_stat, vim.api.nvim_buf_get_name(buf))
                         if ok and stats and stats.size > max_filesize then
@@ -125,7 +123,6 @@ return {
                 },
                 indent = { enable = true },
                 auto_install = false,
-                ignore_install = {},
             })
         end
     },
