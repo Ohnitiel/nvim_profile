@@ -5,12 +5,21 @@ return {
         "neovim/nvim-lspconfig",
         "hrsh7th/nvim-cmp",
         "folke/neodev.nvim",
+        "WhoIsSethDaniel/mason-tool-installer.nvim",
     },
     config = function()
         require("neodev").setup({})
         require("mason").setup()
 
-        local capabilities = require("cmp_nvim_lsp").default_capabilities()
+        require("mason-tool-installer").setup({
+            ensure_installed = {
+                "pyright", "lua_ls", "intelephense", "angularls",
+                "tsserver", "bashls", "stylua", "prettierd",
+                "prettierd", "sqlfmt", "jq",
+            },
+        })
+        local capabilities = vim.lsp.protocol.make_client_capabilities()
+        capabilities = vim.tbl_deep_extend("force", capabilities, require("cmp_nvim_lsp").default_capabilities())
         local lspconfig = require("lspconfig")
         local handlers = {
             function(server_name) -- default handler (optional)
