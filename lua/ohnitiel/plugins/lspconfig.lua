@@ -35,22 +35,13 @@ return {
                             completion = { callSnippet = "Replace" }
                         }
                     },
-                    capabilities = capabilities
+                    capabilities = capabilities,
+                    diagnostics = { disable = { 'missing-fields' } },
                 })
             end,
         }
 
-        require("mason-lspconfig").setup({
-            ensure_installed = {
-                "pyright",
-                "lua_ls",
-                "intelephense",
-                "angularls",
-                "tsserver",
-                "bashls",
-            },
-            handlers = handlers,
-        })
+        require("mason-lspconfig").setup({ handlers = handlers, })
 
 
         vim.api.nvim_create_autocmd("LspAttach", {
