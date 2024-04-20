@@ -23,14 +23,18 @@ vim.keymap.set("v", "<leader>y", [["+y]], { desc = "Copy selection" })
 vim.keymap.set("n", "<leader>Y", [[gg0VG$"+y]], { desc = "Copy entire buffer" })
 vim.keymap.set("x", "<leader>p", [["_dP]], { desc = "Put without yank" })
 
-vim.keymap.set("n", "<leader>s", [[:%s/\<<C-r><C-w>\>/<C-r><C-w>/gI<Left><Left><Left>]])
-vim.keymap.set("n", "<leader>S", [[:%s/\<<C-r><C-W>\>/<C-r><C-W>/gI<Left><Left><Left>]])
+-- Find and replace word or WORD
+vim.keymap.set("n", "<leader>sw", [[:%s/\<<C-r><C-W>\>/<C-r><C-W>/gI<Left><Left><Left>]])
+vim.keymap.set("n", "<leader>sW", [[:%s/\<<C-r><C-A>\>/<C-r><C-A>/gI<Left><Left><Left>]])
+
+vim.keymap.set("n", "[d", vim.diagnostic.goto_prev, { desc = "Previous diagnostic" })
+vim.keymap.set("n", "]d", vim.diagnostic.goto_next, { desc = "Next diagnostic" })
 
 vim.keymap.set("n", "<leader>[", [[^]], { desc = "Begin of line" })
 vim.keymap.set("n", "<leader>w", vim.cmd.write, { desc = "Save buffer" })
 vim.keymap.set("n", "<leader>W", vim.cmd.wall, { desc = "Save all buffers" })
-vim.keymap.set("n", "<leader>x", vim.cmd.quit, { desc = "Quit Nvim" })
-vim.keymap.set("n", "<leader>X", vim.cmd.quitall, { desc = "Quit All Nvim" })
+vim.keymap.set("n", "<leader>q", vim.cmd.quit, { desc = "Quit Nvim" })
+vim.keymap.set("n", "<leader>Q", vim.cmd.quitall, { desc = "Quit All Nvim" })
 
 vim.keymap.set("i", "<C-R>d", function()
      return os.date("%c")
