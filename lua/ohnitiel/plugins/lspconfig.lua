@@ -61,12 +61,11 @@ return {
                 vim.keymap.set("n", "gD", vim.lsp.buf.declaration, { buffer = ev.buf, desc = "LSP go to declaration", })
                 vim.keymap.set("n", "gd", vim.lsp.buf.definition, { buffer = ev.buf, desc = "LSP go to definition", })
                 vim.keymap.set("n", "K", vim.lsp.buf.hover, { buffer = ev.buf, desc = "LSP hover", })
-                vim.keymap.set("i", "<C-k>", vim.lsp.buf.signature_help,
-                    { buffer = ev.buf, desc = "LSP signature help", })
+                vim.keymap.set("n", "<leader>fs", require("telescope.builtin").lsp_document_symbols,
+                    { buffer = ev.buf, desc = "Search current buffer symbols", })
+                vim.keymap.set("n", "<leader>ws", require("telescope.builtin").lsp_dynamic_workspace_symbols,
+                    { buffer = ev.buf, desc = "Search current workspace symbols", })
                 vim.keymap.set("n", "<F2>", vim.lsp.buf.rename, { buffer = ev.buf, desc = "LSP rename", })
-                vim.keymap.set("n", "<F3>", function()
-                    vim.lsp.buf.format({ async = true })
-                end, { buffer = ev.buf, desc = "LSP format file", })
                 vim.keymap.set("n", "<F4>", function()
                     vim.lsp.buf.code_action({ apply = true })
                 end, { buffer = ev.buf, desc = "LSP code action", })
