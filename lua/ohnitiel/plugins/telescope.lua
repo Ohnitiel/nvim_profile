@@ -20,6 +20,8 @@ return {
 
 
         vim.keymap.set("n", "<leader>vh", telescope.help_tags, { desc = "Telescope nvim help" })
+        vim.keymap.set("n", "<leader>r", telescope.resume, { desc = "Resume previous search" })
+        vim.keymap.set("n", "<leader>/", telescope.current_buffer_fuzzy_find, { desc = "Fuzzy find in current buffer" })
 
         -- Quickfix maps
         vim.keymap.set("n", "[f", function() vim.cmd("cprev") end, { desc = "Quickfix previous item" })
