@@ -1,6 +1,15 @@
 return {
     "lewis6991/gitsigns.nvim",
     current_line_blame = true,
+    opts = {
+        signs = {
+            add = { text = '+' },
+            change = { text = '~' },
+            delete = { text = '_' },
+            topdelete = { text = '‾' },
+            changedelete = { text = '~' },
+        },
+    },
     config = function()
         require("gitsigns").setup({
             on_attach = function(bufnr)
