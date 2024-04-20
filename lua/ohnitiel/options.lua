@@ -20,3 +20,6 @@ vim.opt.cursorcolumn = true;
 
 -- No need with lsp_lines
 vim.diagnostic.config({ virtual_text = false, })
+
+vim.opt.undofile = true
+vim.opt.signcolumn = 'yes'
