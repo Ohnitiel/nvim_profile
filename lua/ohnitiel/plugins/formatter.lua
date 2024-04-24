@@ -7,6 +7,7 @@ return {
             typescript = { "prettierd" },
             sql = { "sqlfmt" },
             json = { "jq" },
+            sh = { "beautysh" },
         }
     },
     keys = {
