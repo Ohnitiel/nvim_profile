@@ -54,23 +54,6 @@ return {
     },
 
     {
-        "EdenEast/nightfox.nvim",
-        priority = 1000,
-        config = function()
-            vim.cmd.colorscheme('duskfox')
-            require("nightfox").setup({
-                options = {
-                    styles = {
-                        comments = "italic",
-                        functions = "bold",
-                        types = "italic, bold",
-                    }
-                }
-            })
-        end,
-    },
-
-    {
         "folke/which-key.nvim",
         event = "VeryLazy",
         config = function()
