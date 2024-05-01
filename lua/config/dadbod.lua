@@ -23,15 +23,8 @@ function M.setup()
             pattern = { "sql", "pgsql" },
             callback = function()
                 vim.schedule(db_completion)
+                vim.keymap.set("n", "<F5>", [[DBUIFindBuffer]], {desc = "Set buffer database"})
             end
-        }
-    )
-
-    vim.api.nvim_create_autocmd(
-        "FileType",
-        {
-            pattern = { "sql", "pgsql" },
-            command = [[DBUIFindBuffer]]
         }
     )
 end
