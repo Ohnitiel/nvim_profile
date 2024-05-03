@@ -14,8 +14,8 @@ return {
         require("mason-tool-installer").setup({
             ensure_installed = {
                 "pyright", "lua_ls", "intelephense", "angularls",
-                "tsserver", "bashls", "stylua", "prettierd",
-                "prettierd", "sqlfmt", "jq",
+                "tsserver", "bashls", "prettierd", "sql-formatter",
+                "jq",
             },
         })
         local capabilities = vim.lsp.protocol.make_client_capabilities()
