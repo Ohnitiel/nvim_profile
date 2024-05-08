@@ -7,6 +7,7 @@ return {
             sql = { "sql_formatter" },
             json = { "jq" },
             sh = { "beautysh" },
+            php = { "pint" },
         },
         formatters = {
             sql_formatter = {
