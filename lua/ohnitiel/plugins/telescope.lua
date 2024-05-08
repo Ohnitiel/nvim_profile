@@ -8,7 +8,11 @@ return {
         local telescope = require("telescope.builtin")
 
         -- Files maps
-        vim.keymap.set("n", "<leader>ff", telescope.find_files, { desc = "Telescope find files" })
+        vim.keymap.set("n", "<leader>ff", function()
+            telescope.find_files({
+                no_ignore = true, no_ignore_parent = true, hidden = true
+            })
+        end, { desc = "Telescope find files" })
         vim.keymap.set("n", "<leader>fg", telescope.live_grep, { desc = "Telescope live grep" })
         vim.keymap.set("n", "<leader>fb", telescope.buffers, { desc = "Telescope list buffers" })
 
