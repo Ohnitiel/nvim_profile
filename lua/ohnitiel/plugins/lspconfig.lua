@@ -13,7 +13,7 @@ return {
 
         require("mason-tool-installer").setup({
             ensure_installed = {
-                "pyright", "lua_ls", "intelephense", "angularls",
+                "pyright", "lua_ls", "phpactor", "angularls",
                 "tsserver", "bashls", "prettierd", "sql-formatter",
                 "jq",
             },
