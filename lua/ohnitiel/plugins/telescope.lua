@@ -32,7 +32,6 @@ return {
         vim.keymap.set("n", "]f", function() vim.cmd("cnext") end, { desc = "Quickfix next item" })
         vim.keymap.set("n", "[F", function() vim.cmd("cpfile") end, { desc = "Quickfix previous file" })
         vim.keymap.set("n", "]F", function() vim.cmd("cnfile") end, { desc = "Quickfix next file" })
-        vim.keymap.set("n", "<leader>qf", telescope.quickfix, { desc = "Telescope quickfix" })
 
         -- Git maps
         vim.keymap.set("n", "<leader>gf", telescope.git_files, { desc = "Telescope git files" })
