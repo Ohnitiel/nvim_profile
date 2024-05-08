@@ -53,7 +53,7 @@ return {
                 vim.keymap.set("n", "K", vim.lsp.buf.hover, { buffer = ev.buf, desc = "LSP hover", })
                 vim.keymap.set("n", "<leader>fs", require("telescope.builtin").lsp_document_symbols,
                     { buffer = ev.buf, desc = "Search current buffer symbols", })
-                vim.keymap.set("n", "<leader>ws", require("telescope.builtin").lsp_dynamic_workspace_symbols,
+                vim.keymap.set("n", "<leader>Ws", require("telescope.builtin").lsp_dynamic_workspace_symbols,
                     { buffer = ev.buf, desc = "Search current workspace symbols", })
                 vim.keymap.set("n", "<F2>", vim.lsp.buf.rename, { buffer = ev.buf, desc = "LSP rename", })
                 vim.keymap.set("n", "<F4>", function()
