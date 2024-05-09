@@ -91,7 +91,7 @@ return {
                     "lua", "typescript", "html", "bash", "css",
                     "json", "php", "python", "scss", "sql", "toml",
                     "javascript", "yaml", "dockerfile", "vimdoc",
-                    "hurl"
+                    "hurl", "markdown", "markdown_inline"
                 },
                 sync_install = false,
                 highlight = {
