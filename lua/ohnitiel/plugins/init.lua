@@ -110,4 +110,13 @@ return {
             })
         end
     },
+
+    {
+        "MeanderingProgrammer/markdown.nvim",
+        dependencies = { "nvim-treesitter/nvim-treesitter" },
+        name = "render-markdown",
+        config = function()
+            require("render-markdown").setup({})
+        end,
+    },
 }
