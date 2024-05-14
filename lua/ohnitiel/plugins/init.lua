@@ -119,4 +119,21 @@ return {
             require("render-markdown").setup({})
         end,
     },
+
+    {
+        "kndndrj/nvim-dbee",
+        dependencies = {
+            "MunifTanjim/nui.nvim",
+        },
+        build = function()
+            require("dbee").install()
+        end,
+        config = function()
+            require("dbee").setup({
+                sources = {
+                    require("dbee.sources").EnvSource:new("DB_CONNECTIONS"),
+                },
+            })
+        end,
+    },
 }
