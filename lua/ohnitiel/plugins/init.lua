@@ -136,4 +136,9 @@ return {
             })
         end,
     },
+
+    {
+        "artemave/workspace-diagnostics.nvim",
+        config = true
+    },
 }

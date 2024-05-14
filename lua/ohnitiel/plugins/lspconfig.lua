@@ -23,7 +23,10 @@ return {
         local handlers = {
             function(server_name) -- default handler (optional)
                 lspconfig[server_name].setup({
-                    capabilities = capabilities
+                    capabilities = capabilities,
+                    on_attach = function(client, bufnr)
+                        require("workspace-diagnostics").populate_workspace_diagnostics(client, bufnr)
+                    end
                 })
             end,
 
