@@ -6,6 +6,7 @@ return {
         "hrsh7th/nvim-cmp",
         "folke/neodev.nvim",
         "WhoIsSethDaniel/mason-tool-installer.nvim",
+        "ms-jpq/coq_nvim",
     },
     config = function()
         require("neodev").setup({})
@@ -18,7 +19,8 @@ return {
             },
         })
         local capabilities = vim.lsp.protocol.make_client_capabilities()
-        capabilities = vim.tbl_deep_extend("force", capabilities, require("cmp_nvim_lsp").default_capabilities())
+        -- capabilities = vim.tbl_deep_extend("force", capabilities, require("cmp_nvim_lsp").default_capabilities())
+        capabilities = vim.tbl_deep_extend("force", capabilities, require("coq").lsp_ensure_capabilities())
         local lspconfig = require("lspconfig")
         local handlers = {
             function(server_name) -- default handler (optional)
