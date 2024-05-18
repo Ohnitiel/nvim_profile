@@ -1,11 +1,13 @@
-return {
+return { {
     "ThePrimeagen/harpoon",
+
     branch = "harpoon2",
-    dependencies = {
+
+    requires = {
         "nvim-lua/plenary.nvim",
-        "nvim-telescope/telescope.nvim"
     },
-    config = function()
+
+    function()
         local harpoon = require("harpoon")
 
         harpoon:setup()
@@ -23,4 +25,4 @@ return {
             harpoon.ui:toggle_quick_menu(harpoon:list())
         end)
     end
-}
+} }

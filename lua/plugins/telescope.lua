@@ -1,7 +1,7 @@
-return {
+return { {
     "nvim-telescope/telescope.nvim",
-    dependencies = { "lewis6991/gitsigns.nvim" },
-    config = function()
+
+    function()
         require("telescope").setup({
             preview = { filesize_limit = 2 },
         })
@@ -10,7 +10,7 @@ return {
         -- Files maps
         vim.keymap.set("n", "<leader>ff", function()
             telescope.find_files({
-                no_ignore = true, no_ignore_parent = true, hidden = true
+                no_ignore_parent = true, hidden = true
             })
         end, { desc = "Telescope find files" })
         vim.keymap.set("n", "<leader>fg", telescope.live_grep, { desc = "Telescope live grep" })
@@ -27,12 +27,6 @@ return {
         vim.keymap.set("n", "<leader>r", telescope.resume, { desc = "Resume previous search" })
         vim.keymap.set("n", "<leader>/", telescope.current_buffer_fuzzy_find, { desc = "Fuzzy find in current buffer" })
 
-        -- Quickfix maps
-        vim.keymap.set("n", "[f", function() vim.cmd("cprev") end, { desc = "Quickfix previous item" })
-        vim.keymap.set("n", "]f", function() vim.cmd("cnext") end, { desc = "Quickfix next item" })
-        vim.keymap.set("n", "[F", function() vim.cmd("cpfile") end, { desc = "Quickfix previous file" })
-        vim.keymap.set("n", "]F", function() vim.cmd("cnfile") end, { desc = "Quickfix next file" })
-
         -- Git maps
         vim.keymap.set("n", "<leader>gf", telescope.git_files, { desc = "Telescope git files" })
         vim.keymap.set("n", "<leader>gc", telescope.git_commits, { desc = "Telescope git commits" })
@@ -48,9 +42,6 @@ return {
                 bufnr = 0
             })
         end, { desc = "Telescope buffer diagnostics" })
-
-        require("telescope").load_extension("git_signs")
-        vim.keymap.set("n", "<leader>gs", ":Telescope git_signs<CR>")
     end
 
-}
+} }

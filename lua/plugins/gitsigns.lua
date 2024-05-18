@@ -1,16 +1,13 @@
-return {
+return { {
     "lewis6991/gitsigns.nvim",
-    current_line_blame = true,
-    opts = {
-        signs = {
-            add = { text = '+' },
-            change = { text = '~' },
-            delete = { text = '_' },
-            topdelete = { text = '‾' },
-            changedelete = { text = '~' },
-        },
+
+    requires = {
+        'nvim-tree/nvim-web-devicons'
     },
-    config = function()
+
+    function()
+        vim.opt.signcolumn = 'yes'
+
         require("gitsigns").setup({
             on_attach = function(bufnr)
                 local gs = package.loaded.gitsigns
@@ -47,5 +44,21 @@ return {
                 map("n", "<leader>tb", gs.toggle_current_line_blame, { desc = "Git toggle current line blame" })
             end
         })
-    end
-}
+    end,
+
+    -- setup = function()
+    --     vim.g.gitsign_config = {
+    --         current_line_blame = true,
+    --
+    --         opts = {
+    --             signs = {
+    --                 add = { text = '+' },
+    --                 change = { text = '~' },
+    --                 delete = { text = '_' },
+    --                 topdelete = { text = '‾' },
+    --                 changedelete = { text = 'x' },
+    --             },
+    --         }
+    --     }
+    -- end,
+} }

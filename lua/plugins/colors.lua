@@ -1,7 +1,9 @@
-return {
+return { {
     "EdenEast/nightfox.nvim",
+
     priority = 1000,
-    config = function()
+
+    function()
         require("nightfox").setup({
             options = {
                 styles = {
@@ -11,11 +13,6 @@ return {
                 }
             }
         })
-        local colorschemes = {
-            "sorbet",
-            "nordfox",
-            "terafox",
-        }
-        vim.cmd.colorscheme(colorschemes[math.random(#colorschemes)])
+        vim.cmd.colorscheme("terafox")
     end,
-}
+} }
