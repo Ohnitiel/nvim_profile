@@ -6,11 +6,14 @@ return { {
         "williamboman/mason-lspconfig.nvim",
         "williamboman/mason.nvim",
         "folke/neodev.nvim",
+        "ray-x/lsp_signature.nvim",
+        "artemave/workspace-diagnostics.nvim",
     },
 
     function()
         require("neodev").setup()
         require("mason").setup()
+        require("lsp_signature").setup()
 
         local capabilities = require("cmp_nvim_lsp").default_capabilities()
         capabilities = vim.tbl_deep_extend("force", capabilities, require("cmp_nvim_lsp").default_capabilities())

@@ -7,15 +7,17 @@ require("dep") {
         prefix = "plugins.",
         "codeium",
         "colors",
+        "completion",
+        "formatter",
+        "gitsigns",
         "harpoon",
+        "lsp",
+        "lualine",
         "neogit",
         "telescope",
         "treesitter",
         "undotree",
-        "gitsigns",
-        "lsp",
-        "formatter"
+        "webdevicons"
     },
     "chaoren/vim-wordmotion",
-    "nvim-lualine/lualine.nvim"
 }

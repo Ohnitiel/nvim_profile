@@ -6,8 +6,6 @@ return { {
     },
 
     function()
-        vim.opt.signcolumn = 'yes'
-
         require("gitsigns").setup({
             on_attach = function(bufnr)
                 local gs = package.loaded.gitsigns
@@ -42,23 +40,15 @@ return { {
                 end, { desc = "Git diff buffer with head == count" })
                 map("n", "<leader>td", gs.toggle_deleted, { desc = "Git toggle deleted" })
                 map("n", "<leader>tb", gs.toggle_current_line_blame, { desc = "Git toggle current line blame" })
-            end
+            end,
+
+            signcolumn = true,
+            current_line_blame = false,
+            current_line_blame_opts = {
+                virt_text = true,
+                virt_text_pos = 'eol',
+                delay = 750,
+            },
         })
     end,
-
-    -- setup = function()
-    --     vim.g.gitsign_config = {
-    --         current_line_blame = true,
-    --
-    --         opts = {
-    --             signs = {
-    --                 add = { text = '+' },
-    --                 change = { text = '~' },
-    --                 delete = { text = '_' },
-    --                 topdelete = { text = '‾' },
-    --                 changedelete = { text = 'x' },
-    --             },
-    --         }
-    --     }
-    -- end,
 } }
