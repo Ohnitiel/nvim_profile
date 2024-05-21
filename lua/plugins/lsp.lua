@@ -50,6 +50,8 @@ return { {
             callback = function(ev)
                 vim.bo[ev.buf].omnifunc = "v:lua.vim.lsp.omnifunc"
 
+                vim.keymap.set("n", "gd", vim.lsp.buf.definition, { buffer = ev.buf })
+                vim.keymap.set("n", "gD", vim.lsp.buf.declaration, { buffer = ev.buf })
                 vim.keymap.set("n", "<F2>", vim.lsp.buf.rename, { buffer = ev.buf, desc = "LSP rename", })
                 vim.keymap.set("n", "<F4>", function()
                     vim.lsp.buf.code_action({ apply = true })
