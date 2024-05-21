@@ -13,11 +13,13 @@ require("dep") {
         "harpoon",
         "lsp",
         "lualine",
+        "markdown",
         "neogit",
+        "oil",
         "telescope",
         "treesitter",
         "undotree",
-        "webdevicons"
+        "webdevicons",
     },
     "chaoren/vim-wordmotion",
 }
