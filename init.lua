@@ -8,6 +8,7 @@ require("dep") {
         "codeium",
         "colors",
         "completion",
+        "dbee",
         "formatter",
         "gitsigns",
         "harpoon",
