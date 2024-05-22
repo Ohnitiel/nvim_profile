@@ -4,12 +4,14 @@ return {{
     function()
         require("oil").setup({
             columns = {
-                "icon", "mtime", "permissions"
+                "icon"
             },
             view_options = {
                 show_hidden = true
             },
         })
+
+        vim.keymap.set("n", "-", require("oil").open, { desc = "Open parent directory" })
     end,
 
     requires = {
