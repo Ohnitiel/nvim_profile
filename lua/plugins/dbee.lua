@@ -5,7 +5,7 @@ return { {
         "MunifTanjim/nui.nvim",
     },
 
-    setup = function()
+    config = function()
         require("dbee").install()
     end,
 
