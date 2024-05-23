@@ -12,13 +12,18 @@ return { {
         "lukas-reineke/cmp-rg",
         "L3MON4D3/LuaSnip",
         "saadparwaiz1/cmp_luasnip",
+
+        {
+            "MattiasMTS/cmp-dbee",
+            requires = {
+                "kndndrj/nvim-dbee"
+            },
+        }
     },
 
     function()
         local cmp = require("cmp")
-
-        cmp.setup {
-            sources = cmp.config.sources({
+        local default_sources = cmp.config.sources({
                 { name = "nvim_lsp" },
                 { name = "nvim_lsp_signature_help" },
                 { name = "treesitter" },
@@ -26,8 +31,11 @@ return { {
                 { name = "codeium" },
             }, {
                 { name = "buffer" },
-            }),
+            })
 
+
+        cmp.setup {
+            sources = default_sources,
             snippet = {
                 expand = function(args)
                     require("luasnip").lsp_expand(args.body)
@@ -64,6 +72,17 @@ return { {
                 { name = "cmdline" },
                 -- { name = "codeium" },
             })
+        })
+
+        vim.api.nvim_create_autocmd("FileType", {
+            pattern = "sql",
+            callback = function()
+                local sources = default_sources[#default_sources + 1]
+
+                sources = { name = "cmp-dbee" }
+
+                cmp.setup.buffer { sources = sources }
+            end
         })
     end,
 } }
