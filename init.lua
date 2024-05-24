@@ -22,5 +22,4 @@ require("dep") {
         "undotree",
         "webdevicons",
     },
-    "chaoren/vim-wordmotion",
 }
