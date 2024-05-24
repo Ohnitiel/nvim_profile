@@ -1,11 +1,9 @@
-return { {
+return {
     "nvim-treesitter/nvim-treesitter",
 
-    config = function()
-        vim.cmd("TSUpdate")
-    end,
+    build = ':TSUpdate',
 
-    function()
+    config = function()
         require("nvim-treesitter.configs").setup({
             ensure_installed = {
                 "lua", "typescript", "html", "bash", "css",
@@ -26,4 +24,4 @@ return { {
             },
         })
     end
-} }
+}

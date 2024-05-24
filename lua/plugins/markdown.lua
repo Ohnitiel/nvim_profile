@@ -1,9 +1,7 @@
-return {{
+return {
     "MeanderingProgrammer/markdown.nvim",
 
-    function()
-        require("render-markdown").setup()
-    end,
+    config = true,
 
-    requires = { "nvim-treesitter/nvim-treesitter" },
-}}
+    dependencies = { "nvim-treesitter/nvim-treesitter" },
+}

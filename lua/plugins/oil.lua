@@ -1,7 +1,7 @@
-return {{
+return {
     "stevearc/oil.nvim",
 
-    function()
+    config = function()
         require("oil").setup({
             columns = {
                 "icon"
@@ -14,7 +14,7 @@ return {{
         vim.keymap.set("n", "-", require("oil").open, { desc = "Open parent directory" })
     end,
 
-    requires = {
+    dependencies = {
         "nvim-tree/nvim-web-devicons",
     }
-}}
+}

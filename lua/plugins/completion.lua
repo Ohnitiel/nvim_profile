@@ -1,7 +1,7 @@
-return { {
+return {
     "hrsh7th/nvim-cmp",
 
-    requires = {
+    dependencies = {
         "neovim/nvim-lspconfig",
         "hrsh7th/cmp-nvim-lsp",
         "hrsh7th/cmp-buffer",
@@ -12,26 +12,19 @@ return { {
         "lukas-reineke/cmp-rg",
         "L3MON4D3/LuaSnip",
         "saadparwaiz1/cmp_luasnip",
-
-        {
-            "MattiasMTS/cmp-dbee",
-            requires = {
-                "kndndrj/nvim-dbee"
-            },
-        }
     },
 
-    function()
+    config = function()
         local cmp = require("cmp")
         local default_sources = cmp.config.sources({
-                { name = "nvim_lsp" },
-                { name = "nvim_lsp_signature_help" },
-                { name = "treesitter" },
-                { name = "rg" },
-                { name = "codeium" },
-            }, {
-                { name = "buffer" },
-            })
+            { name = "nvim_lsp" },
+            { name = "nvim_lsp_signature_help" },
+            { name = "treesitter" },
+            { name = "rg" },
+            { name = "codeium" },
+        }, {
+            { name = "buffer" },
+        })
 
 
         cmp.setup {
@@ -74,15 +67,12 @@ return { {
             })
         })
 
-        vim.api.nvim_create_autocmd("FileType", {
-            pattern = "sql",
-            callback = function()
-                local sources = default_sources[#default_sources + 1]
-
-                sources = { name = "cmp-dbee" }
-
-                cmp.setup.buffer { sources = sources }
-            end
+        -- Setup up vim-dadbod
+        cmp.setup.filetype({ "sql" }, {
+            sources = {
+                { name = "vim-dadbod-completion" },
+                { name = "buffer" },
+            },
         })
     end,
-} }
+}

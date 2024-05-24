@@ -1,7 +1,7 @@
-return { {
+return {
     "nvim-telescope/telescope.nvim",
 
-    function()
+    config = function()
         require("telescope").setup({
             preview = { filesize_limit = 2 },
         })
@@ -44,4 +44,4 @@ return { {
         end, { desc = "Telescope buffer diagnostics" })
     end
 
-} }
+}

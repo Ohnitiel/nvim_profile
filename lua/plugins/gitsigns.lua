@@ -1,11 +1,11 @@
-return { {
+return {
     "lewis6991/gitsigns.nvim",
 
-    requires = {
+    dependencies = {
         'nvim-tree/nvim-web-devicons'
     },
 
-    function()
+    config = function()
         require("gitsigns").setup({
             on_attach = function(bufnr)
                 local gs = package.loaded.gitsigns
@@ -51,4 +51,4 @@ return { {
             },
         })
     end,
-} }
+}

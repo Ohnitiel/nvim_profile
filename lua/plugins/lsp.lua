@@ -1,7 +1,7 @@
-return { {
+return {
     "neovim/nvim-lspconfig",
 
-    requires = {
+    dependencies = {
         "hrsh7th/cmp-nvim-lsp",
         "williamboman/mason-lspconfig.nvim",
         "williamboman/mason.nvim",
@@ -10,7 +10,7 @@ return { {
         "artemave/workspace-diagnostics.nvim",
     },
 
-    function()
+    config = function()
         require("neodev").setup()
         require("mason").setup()
         require("lsp_signature").setup()
@@ -59,4 +59,4 @@ return { {
             end
         })
     end
-} }
+}
