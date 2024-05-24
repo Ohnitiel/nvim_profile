@@ -1,8 +1,8 @@
 return { {
     "stevearc/conform.nvim",
 
-    setup = function()
-        vim.g.conform_config = {
+    function()
+        require("conform").setup({
             formatters_by_ft = {
                 javascript = { "prettierd" },
                 typescript = { "prettierd" },
@@ -16,10 +16,7 @@ return { {
                     args = { "-c", tostring(vim.fs.find("sql-formatter.json", { upward = true })[1]) }
                 },
             },
-        }
-    end,
-
-    function()
+        })
         vim.keymap.set("n", "<F3>", function() require("conform").format({ async = true, lsp_fallback = true }) end)
     end
 } }
