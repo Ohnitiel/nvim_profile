@@ -1,9 +1,16 @@
+local M = {}
+
+
 JSON_QUOTE = '"'
 TRUE_LEN = #'true'
 FALSE_LEN = #'false'
 NULL_LEN = #'null'
 
-local function lex_string(_str)
+--- Lex String
+--- @param _str string String to lex
+--- @return string|nil json The evaluated json
+--- @return string _str The remaining string
+function M.lex_string(_str)
     local json = ''
 
     if _str:sub(1, 1) == JSON_QUOTE then
@@ -23,7 +30,11 @@ local function lex_string(_str)
     error('Missing closing quote for JSON string')
 end
 
-local function lex_number(_str)
+--- Lex Number
+--- @param _str string String to lex into a number
+--- @return string|nil json The evaluated json
+--- @return string _str The remaining string
+function M.lex_number(_str)
     local json = ''
 
     if _str:sub(1, 1) == '-' then
@@ -61,7 +72,11 @@ local function lex_number(_str)
     return json, _str:sub(#json + 1)
 end
 
-local function lex_bool(_str)
+--- Lex Boolean
+--- @param _str string String to lex into a boolean
+--- @return boolean|nil json The evaluated json
+--- @return string _str The remaining string
+function M.lex_bool(_str)
     if (#_str >= TRUE_LEN) and (_str:sub(1, TRUE_LEN) == 'true') then
         return true, _str:sub(TRUE_LEN + 1)
     elseif (#_str >= FALSE_LEN) and (_str:sub(1, FALSE_LEN) == 'false') then
@@ -71,7 +86,11 @@ local function lex_bool(_str)
     return nil, _str
 end
 
-local function lex_null(_str)
+--- Lex Null
+--- @param _str string String to lex into null
+--- @return boolean|nil json The evaluated json
+--- @return string _str The remaining string
+function M.lex_null(_str)
     if (#_str >= NULL_LEN) and (_str:sub(1, NULL_LEN) == 'null') then
         return true, _str:sub(NULL_LEN + 1)
     end
@@ -79,31 +98,34 @@ local function lex_null(_str)
     return nil, _str
 end
 
-local function lex(_str)
+--- Lexes and tokenizes a json string
+--- @param _str string String to lex
+--- @return table tokens The list of tokens
+function M.lex(_str)
     local tokens = {}
     local json = nil
     local char = nil
 
     while _str ~= nil do
-        json, _str = lex_string(_str)
+        json, _str = M.lex_string(_str)
         if json ~= nil then
             table.insert(tokens, json)
             goto continue
         end
 
-        json, _str = lex_number(_str)
+        json, _str = M.lex_number(_str)
         if json ~= nil then
             table.insert(tokens, json)
             goto continue
         end
 
-        json, _str = lex_bool(_str)
+        json, _str = M.lex_bool(_str)
         if json ~= nil then
             table.insert(tokens, json)
             goto continue
         end
 
-        json, _str = lex_null(_str)
+        json, _str = M.lex_null(_str)
         if json ~= nil then
             table.insert(tokens, json)
             goto continue
@@ -128,20 +150,22 @@ local function lex(_str)
     return tokens
 end
 
-local parse
-
-local function parse_array(tokens)
+---Parses a json array from tokens
+---@param tokens table Table containing the tokens
+---@return table
+---@return table
+function M.parse_array(tokens)
     local json = nil
     local json_array = {}
     local token = tokens[1]
 
     if token == ']' then
         table.remove(tokens, 1)
-        return json, tokens
+        return {}, tokens
     end
 
     while true do
-        json, tokens = parse(tokens)
+        json, tokens = M.parse(tokens)
         table.insert(json_array, json)
 
         token = tokens[1]
@@ -156,8 +180,11 @@ local function parse_array(tokens)
     end
 end
 
-local function parse_object(tokens)
-    local json = nil
+---Parses a lua table of json tokens into a lua table
+---@param tokens table
+---@return table
+---@return table
+function M.parse_object(tokens)
     local json_key = nil
     local json_value = nil
     local json_object = {}
@@ -165,8 +192,7 @@ local function parse_object(tokens)
 
     if token == '}' then
         table.remove(tokens, 1)
-        print(json, token)
-        return json, tokens
+        return {}, tokens
     end
 
     while true do
@@ -182,7 +208,7 @@ local function parse_object(tokens)
         end
 
         table.remove(tokens, 1)
-        json_value, tokens = parse(tokens)
+        json_value, tokens = M.parse(tokens)
         json_object[json_key] = json_value
 
         token = tokens[1]
@@ -196,12 +222,14 @@ local function parse_object(tokens)
     end
 end
 
-parse = function(tokens, is_root)
+---Parses a lua table of json tokens into a lua table
+---@param tokens table
+---@param is_root? boolean
+---@return table
+---@return table
+function M.parse(tokens, is_root)
     local token = tokens[1]
-
-    if is_root == nil then
-        is_root = false
-    end
+    is_root = is_root or false
 
     if is_root and token ~= '{' then
         error('JSON root must be an object')
@@ -209,26 +237,25 @@ parse = function(tokens, is_root)
 
     if token == '{' then
         table.remove(tokens, 1)
-        return parse_object(tokens)
+        return M.parse_object(tokens)
     elseif token == '[' then
         table.remove(tokens, 1)
-        return parse_array(tokens)
+        return M.parse_array(tokens)
     elseif #tokens > 0 then
         table.remove(tokens, 1)
         return token, tokens
     end
+
+    return {}, {}
 end
 
-local function from_string(_str)
-    local tokens = lex(_str)
-    return parse(tokens, true)
+---Converts a json string to a table
+---@param _str string
+---@return table
+---@return table
+function M.from_string(_str)
+    local tokens = M.lex(_str)
+    return M.parse(tokens, true)
 end
 
-
-
-local db_file = io.input(os.getenv("HOME") .. "/.dotfiles/databases.json")
-local content = io.read("*a")
-local databases = from_string(content)
-io.close(db_file)
-
-print(#databases)
+return M
