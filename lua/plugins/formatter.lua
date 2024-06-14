@@ -17,6 +17,9 @@ return {
                 },
             },
         })
-        vim.keymap.set("n", "<F3>", function() require("conform").format({ async = true, lsp_fallback = true }) end)
+        vim.keymap.set("n", "<F3>",
+            function()
+                require("conform").format({ async = true, lsp_fallback = true })
+            end)
     end
 }

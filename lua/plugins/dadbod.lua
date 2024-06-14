@@ -18,11 +18,16 @@ return {
 
         local json = require("functions.json")
 
-        local db_file = io.input(os.getenv("HOME") .. "/.dotfiles/databases.json")
+        local success, db_file = pcall(io.open(os.getenv("HOME") .. "/.dotfiles/databases.json"))
+        if not success then
+            return
+        end
         local content = io.read("*a")
-        local databases = json.from_string(content)
+        local success, databases = pcall(json.from_string(content))
         io.close(db_file)
 
-        vim.g.dbs = databases['databases']
+        if success then
+            vim.g.dbs = databases['databases']
+        end
     end,
 }
