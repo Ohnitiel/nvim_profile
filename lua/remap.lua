@@ -10,7 +10,7 @@ vim.keymap.set({ "n", "v" }, "<leader>Y", [[ggVG"+y]], { desc = "Copy buffer" })
 vim.keymap.set("x", "<leader>p", [["_dP]], { desc = "Put register contents" })
 
 vim.keymap.set("n", "<leader>sw", [[:%s/\<<C-r><C-W>\>/<C-r><C-W>/gI<Left><Left><Left>]])
-vim.keymap.set("v", "<leader>sw", [["0y:%s/<C-r>0//gI<Left><Left><Left>]])
+vim.keymap.set("v", "<leader>sw", [["9y:%s/<C-r>9//gI<Left><Left><Left>]])
 
 vim.keymap.set("n", "[f", function() vim.cmd("cprev") end, { desc = "Quickfix previous item" })
 vim.keymap.set("n", "]f", function() vim.cmd("cnext") end, { desc = "Quickfix next item" })
