@@ -66,13 +66,5 @@ return {
                 -- { name = "codeium" },
             })
         })
-
-        -- Setup up vim-dadbod
-        cmp.setup.filetype({ "sql" }, {
-            sources = {
-                { name = "vim-dadbod-completion" },
-                { name = "buffer" },
-            },
-        })
     end,
 }

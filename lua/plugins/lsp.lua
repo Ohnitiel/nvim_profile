@@ -8,6 +8,8 @@ return {
         "folke/neodev.nvim",
         "ray-x/lsp_signature.nvim",
         "artemave/workspace-diagnostics.nvim",
+        "sqls-server/sqls.vim",
+        "nanotee/sqls.nvim",
     },
 
     config = function()
@@ -41,7 +43,15 @@ return {
                         }
                     }
                 })
-            end
+            end,
+
+            ["sqls"] = function()
+                lsp.sqls.setup({
+                    on_attach = function(client, bufnr)
+                        require("sqls").on_attach(client, bufnr)
+                    end
+                })
+            end,
         }
 
         require("mason-lspconfig").setup({ handlers = handlers })
