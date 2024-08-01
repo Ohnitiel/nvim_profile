@@ -10,6 +10,7 @@ return {
                 json = { "jq" },
                 sh = { "beautysh" },
                 php = { "pint" },
+                python = { "autopep8" },
             },
             formatters = {
                 sql_formatter = {
