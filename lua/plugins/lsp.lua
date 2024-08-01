@@ -1,3 +1,15 @@
+local function custom_attach(client, bufnr)
+    require("lsp_signature").on_attach({
+        bind = true,
+        use_lspsaga = false,
+        floating_window = true,
+        fix_pos = true,
+        hint_enable = true,
+        hi_parameter = "Search",
+        handler_opts = { "double" }
+    })
+end
+
 return {
     "neovim/nvim-lspconfig",
 
@@ -16,11 +28,31 @@ return {
         require("neodev").setup()
         require("mason").setup()
         require("lsp_signature").setup()
-
+        local lsp = require("lspconfig")
         local capabilities = require("cmp_nvim_lsp").default_capabilities()
+
         capabilities = vim.tbl_deep_extend("force", capabilities, require("cmp_nvim_lsp").default_capabilities())
 
-        local lsp = require("lspconfig")
+        local ahk2_lsp = {
+            autostart = true,
+            cmd = {
+                "node",
+                vim.fn.expand("~/.local/share/nvim/mason/bin/ahk2-lsp.js"),
+                "--stdio"
+            },
+            filetypes = { "ahk", "autohotkey", "ah2" },
+            init_options = {
+                locale = "en-us",
+                InterpreterPath = "/mnt/c/Users/ricardo.leitinho/AppData/Local/Programs/AutoHotkey/v2/AutoHotkey.exe"
+            },
+            single_file_support = true,
+            flags = { debounce_text_change = 300 },
+            capabilities = capabilities,
+            on_attach = custom_attach
+        }
+
+        local configs = lsp.configs
+        configs["ahk2"] = { default_config = ahk2_lsp }
 
         local handlers = {
             function(server)
