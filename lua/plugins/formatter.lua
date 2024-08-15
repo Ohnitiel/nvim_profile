@@ -4,13 +4,14 @@ return {
     config = function()
         require("conform").setup({
             formatters_by_ft = {
+                go = { "gofumpt" },
                 javascript = { "prettierd" },
-                typescript = { "prettierd" },
-                sql = { "sql_formatter" },
                 json = { "jq" },
-                sh = { "beautysh" },
                 php = { "pint" },
                 python = { "autopep8" },
+                sh = { "beautysh" },
+                sql = { "sql_formatter" },
+                typescript = { "prettierd" },
             },
             formatters = {
                 sql_formatter = {

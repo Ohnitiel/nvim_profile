@@ -37,7 +37,7 @@ return {
             autostart = true,
             cmd = {
                 "node",
-                vim.fn.expand("~/.local/share/nvim/mason/bin/ahk2-lsp.js"),
+                vim.fn.expand("~/.local/share/nvim/mason/bin/ahk2_lsp"),
                 "--stdio"
             },
             filetypes = { "ahk", "autohotkey", "ah2" },
@@ -51,8 +51,9 @@ return {
             on_attach = custom_attach
         }
 
-        local configs = lsp.configs
+        local configs = require("lspconfig.configs")
         configs["ahk2"] = { default_config = ahk2_lsp }
+        lsp.ahk2.setup({})
 
         local handlers = {
             function(server)
@@ -61,6 +62,15 @@ return {
                     on_attach = function(client, bufnr)
                         require("workspace-diagnostics").populate_workspace_diagnostics(client, bufnr)
                     end
+                })
+            end,
+
+            ["gopls"] = function()
+                lsp.gopls.setup({
+                    capabilities = capabilities,
+                    gopls = {
+                        gofumpt = true,
+                    }
                 })
             end,
 
