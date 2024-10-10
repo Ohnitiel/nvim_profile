@@ -1,19 +1,11 @@
 return {
-    "EdenEast/nightfox.nvim",
+    "rafamadriz/neon",
 
     priority = 1000,
     lazy = false,
 
     config = function()
-        require("nightfox").setup({
-            options = {
-                styles = {
-                    comments = "italic",
-                    functions = "bold",
-                    types = "italic, bold",
-                }
-            }
-        })
-        vim.cmd.colorscheme("terafox")
+        vim.g.neon_style = "dark"
+        vim.cmd.colorscheme("neon")
     end,
 }

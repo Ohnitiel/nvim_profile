@@ -1,73 +1,43 @@
-local function custom_attach(client, bufnr)
-    require("lsp_signature").on_attach({
-        bind = true,
-        use_lspsaga = false,
-        floating_window = true,
-        fix_pos = true,
-        hint_enable = true,
-        hi_parameter = "Search",
-        handler_opts = { "double" }
-    })
-end
-
 return {
     "neovim/nvim-lspconfig",
 
+    lazy = false,
     dependencies = {
-        "hrsh7th/cmp-nvim-lsp",
-        "williamboman/mason-lspconfig.nvim",
+        { "ms-jpq/coq_nvim",       branch = "coq" },
+        { "ms-jpq/coq.artifacts",  branch = "artifacts" },
+        { "ms-jpq/coq.thirdparty", branch = "3p" },
+        {
+            "folke/lazydev.nvim",
+            ft = "lua",
+            dependencies = { "Bilal2453/luvit-meta", lazy = true },
+        },
         "williamboman/mason.nvim",
-        "folke/neodev.nvim",
-        "ray-x/lsp_signature.nvim",
-        "artemave/workspace-diagnostics.nvim",
-        "sqls-server/sqls.vim",
-        "nanotee/sqls.nvim",
+        "williamboman/mason-lspconfig.nvim",
     },
 
-    config = function()
-        require("neodev").setup()
-        require("mason").setup()
-        require("lsp_signature").setup()
-        local lsp = require("lspconfig")
-        local capabilities = require("cmp_nvim_lsp").default_capabilities()
-
-        capabilities = vim.tbl_deep_extend("force", capabilities, require("cmp_nvim_lsp").default_capabilities())
-
-        local ahk2_lsp = {
-            autostart = true,
-            cmd = {
-                "node",
-                vim.fn.expand("~/.local/share/nvim/mason/bin/ahk2_lsp"),
-                "--stdio"
-            },
-            filetypes = { "ahk", "autohotkey", "ah2" },
-            init_options = {
-                locale = "en-us",
-                InterpreterPath = "/mnt/c/Users/ricardo.leitinho/AppData/Local/Programs/AutoHotkey/v2/AutoHotkey.exe"
-            },
-            single_file_support = true,
-            flags = { debounce_text_change = 300 },
-            capabilities = capabilities,
-            on_attach = custom_attach
+    init = function()
+        vim.g.coq_settings = {
+            auto_start = true,
         }
+    end,
 
-        local configs = require("lspconfig.configs")
-        configs["ahk2"] = { default_config = ahk2_lsp }
-        lsp.ahk2.setup({})
+    config = function()
+        require("mason").setup()
+        require("lazydev").setup()
+        local lsp = require("lspconfig")
+        local coq = require("coq")
 
         local handlers = {
             function(server)
                 lsp[server].setup({
-                    capabilities = capabilities,
-                    on_attach = function(client, bufnr)
-                        require("workspace-diagnostics").populate_workspace_diagnostics(client, bufnr)
-                    end
+                    capabilities = coq.lsp_ensure_capabilities()
                 })
             end,
 
+
             ["gopls"] = function()
                 lsp.gopls.setup({
-                    capabilities = capabilities,
+                    capabilities = coq.lsp_ensure_capabilities(),
                     gopls = {
                         gofumpt = true,
                     }
@@ -77,23 +47,12 @@ return {
             ["lua_ls"] = function()
                 lsp.lua_ls.setup({
                     settings = {
-                        Lua = {
-                            completion = { callSnippet = "Replace" }
-                        },
-                        capabilities = capabilities,
-                        diagnostics = { disable = { "missing-fields" },
-                        }
+                        capabilities = coq.lsp_ensure_capabilities(),
+                        Lua = { completion = { callSnippet = "Replace" } },
+                        diagnostics = { disable = { "missing-fields" } },
                     }
                 })
-            end,
-
-            ["sqls"] = function()
-                lsp.sqls.setup({
-                    on_attach = function(client, bufnr)
-                        require("sqls").on_attach(client, bufnr)
-                    end
-                })
-            end,
+            end
         }
 
         require("mason-lspconfig").setup({ handlers = handlers })
@@ -111,4 +70,5 @@ return {
             end
         })
     end
+
 }

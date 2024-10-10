@@ -5,12 +5,7 @@ return {
 
     config = function()
         require("nvim-treesitter.configs").setup({
-            ensure_installed = {
-                "lua", "typescript", "html", "bash", "css",
-                "json", "php", "python", "scss", "sql", "toml",
-                "javascript", "yaml", "dockerfile", "vimdoc",
-                "hurl", "markdown", "markdown_inline"
-            },
+            auto_install = true,
             highlight = {
                 enable = true,
                 disable = function(_, buf)

@@ -1,5 +1,7 @@
 vim.g.mapleader = " "
 
+vim.keymap.set("n", "-", vim.cmd.Ex, { desc = "Explorer" })
+
 vim.keymap.set("n", "<leader>w", vim.cmd.write, { desc = "Save buffer" })
 vim.keymap.set("n", "<leader>q", vim.cmd.quit, { desc = "Quit buffer" })
 
