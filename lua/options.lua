@@ -15,6 +15,9 @@ vim.opt.inccommand = "split"
 
 vim.opt.shada = { "'10", "<0", "s10", "h" }
 
+vim.o.updatetime = 300
+vim.wo.signcolumn = 'yes'
+
 vim.cmd([[
 let g:clipboard = {
 \ 'name': 'WSL',
