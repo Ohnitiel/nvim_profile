@@ -13,6 +13,7 @@ return {
         },
         "williamboman/mason.nvim",
         "williamboman/mason-lspconfig.nvim",
+        "nanotee/sqls.nvim",
     },
 
     init = function()
@@ -34,6 +35,14 @@ return {
                 })
             end,
 
+            ["sqls"] = function()
+                lsp.sqls.setup({
+                    capabilities = coq.lsp_ensure_capabilities(),
+                    on_attach = function(client, bufnr)
+                        require('sqls').on_attach(client, bufnr)
+                    end
+                })
+            end,
 
             ["gopls"] = function()
                 lsp.gopls.setup({

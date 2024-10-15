@@ -8,7 +8,7 @@ return {
                 javascript = { "prettierd" },
                 json = { "jq" },
                 php = { "pint" },
-                python = { "autopep8" },
+                python = { "ruff" },
                 sh = { "beautysh" },
                 sql = { "sql_formatter" },
                 typescript = { "prettierd" },
