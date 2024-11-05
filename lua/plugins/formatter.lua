@@ -10,12 +10,12 @@ return {
                 php = { "pint" },
                 python = { "ruff" },
                 sh = { "beautysh" },
-                sql = { "sql_formatter" },
+                sql = { "pg_format" },
                 typescript = { "prettierd" },
             },
             formatters = {
-                sql_formatter = {
-                    args = { "-c", tostring(vim.fs.find("sql-formatter.json", { upward = true })[1]) }
+                pg_format = {
+                    prepend_args = { "-s", "2", "-U", "2" }
                 },
             },
         })
