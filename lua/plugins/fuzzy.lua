@@ -21,6 +21,16 @@ return {
 	local builtin = require("telescope.builtin")
 
 	vim.keymap.set("n", "<leader>ff", builtin.find_files)
+	vim.keymap.set("n", "<leader>vi", function()
+	    builtin.find_files({
+		    cwd = os.getenv("HOME") .. "/.config/nvim",
+	    })
+	end)
+	vim.keymap.set("n", "<leader>fi", function()
+	    builtin.find_files({
+		    cwd = "/etc/fish",
+	    })
+	end)
 	vim.keymap.set("n", "<leader>gw", builtin.grep_string)
 	vim.keymap.set("n", "<leader>gW", function()
 	    builtin.grep_string({ search = vim.fn.expand("cWORD") })
