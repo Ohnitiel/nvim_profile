@@ -1,0 +1,12 @@
+vim.opt.breakindent = true
+vim.opt.number = true
+vim.opt.relativenumber = true
+vim.opt.colorcolumn = '80'
+vim.opt.wrapmargin = 80
+vim.opt.undofile = true
+vim.opt.undodir = '/home/ohnitiel/.local/state/nvim/undo/'
+vim.opt.shiftwidth = 4
+vim.opt.softtabstop = 4
+vim.opt.shiftround = true
+vim.opt.backup = true
+vim.opt.backupdir = '/home/ohnitiel/.local/state/nvim/backup/'

@@ -1,0 +1,154 @@
+return {
+    "neovim/nvim-lspconfig",
+    dependencies = {
+	"williamboman/mason.nvim",
+	"williamboman/mason-lspconfig.nvim",
+
+	{
+	    "hrsh7th/nvim-cmp",
+	    dependencies = {
+		"hrsh7th/cmp-nvim-lsp",
+		"hrsh7th/cmp-path",
+		"hrsh7th/cmp-buffer",
+		"hrsh7th/cmp-cmdline",
+		"hrsh7th/cmp-vsnip",
+		"hrsh7th/vim-vsnip",
+	    },
+	    opts = function (_, opts)
+		opts.sources = opts.sources or {}
+		table.insert(opts.sources, {
+		    name = "lazydev",
+		    group_index = 0,
+		})
+	    end,
+	},
+
+	{
+	    "Exafunction/codeium.nvim",
+	    dependencies = {
+		"nvim-lua/plenary.nvim",
+		"hrsh7th/nvim-cmp",
+	    },
+	},
+
+	{
+	    "folke/lazydev.nvim",
+	    ft = "lua",
+	},
+
+    },
+
+    config = function()
+	require("mason").setup()
+	require("lazydev").setup()
+	require("codeium").setup({
+	    config_path = os.getenv("HOME") .. "/.config/codeium/config.json"
+	})
+
+	local feedkey = function (key, mode)
+	    vim.api.nvim_feedkeys(vim.api.nvim_replace_termcodes(key, true, true, true), mode, true)
+	end
+
+	local cmp = require("cmp")
+	cmp.setup({
+	    snippet = {
+		expand = function (args)
+		    vim.fn["vsnip#anonymous"](args.body)
+		end
+	    },
+
+	    windows = {
+		completion = cmp.config.window.bordered(),
+		documentation = cmp.config.window.bordered()
+	    },
+
+	    sources = cmp.config.sources(
+		{
+		    { name = 'codeium' },
+		},
+		{
+		    { name = 'nvim_lsp' },
+		    { name = 'vsnip' },
+		},
+		{
+		    {name = 'buffer' },
+		}
+	    ),
+
+	    mapping = {
+		["<C-n>"] = cmp.mapping.select_next_item(),
+		["<C-p>"] = cmp.mapping.select_prev_item(),
+		["<C-Space>"] = cmp.mapping.complete(),
+		["<C-e>"] = cmp.mapping.abort(),
+		["<C-b>"] = cmp.mapping.scroll_docs(-4),
+		["<C-f>"] = cmp.mapping.scroll_docs(4),
+		["<C-l>"] = cmp.mapping(function()
+		    if vim.fn["vsnip#available"](1) == 1 then
+			feedkey("<Plug>(vsnip-expand-or-jump)", "")
+		    end
+		end, {"i", "s"}),
+		["<C-h>"] = cmp.mapping(function()
+		    if vim.fn["vsnip#jumpable"](-1) == 1 then
+			feedkey("<Plug>(vsnip-jump-prev)", "")
+		    end
+		end),
+	    },
+	})
+
+	cmp.setup.cmdline({ ':' }, {
+	    sources = cmp.config.sources(
+		{ { name = 'path' } }, { { name = 'cmdline'} }
+	    ),
+	    matching = {
+		disallow_symbol_nonprefix_matching = false,
+	    }
+	})
+
+	cmp.setup.cmdline({ '/', '?' }, {
+	    sources = { { name = 'buffer' } },
+	})
+
+	local lsp = require("lspconfig")
+	local capabilities = require("cmp_nvim_lsp").default_capabilities()
+
+	local handlers = {
+	    function (server)
+		lsp[server].setup({
+		    capabilities = capabilities
+		})
+
+		lsp.lua_ls.setup({
+		    capabilities = capabilities,
+		    settings = {
+			Lua = {
+			    diagnostics = {
+				globals = { "vim" },
+				disable = {
+				    "missing-parameters",
+				    "missing-fields"
+				}
+			    },
+			},
+		    },
+		})
+	    end
+	}
+
+	require("mason-lspconfig").setup({
+	    ensure_installed = { 'lua_ls' },
+	    handlers = handlers,
+	    automatic_installation = false
+	})
+
+
+	vim.api.nvim_create_autocmd("LSPAttach", {
+	    callback = function(ev)
+		vim.bo[ev.buf].omnifunc = "v:lua.vim.lsp.omnifunc"
+
+		vim.keymap.set("n", "grd", vim.lsp.buf.definition, { buffer = ev.buf })
+		vim.keymap.set("n", "grD", vim.lsp.buf.declaration, { buffer = ev.buf })
+	    end
+	})
+
+    end
+}
