@@ -10,3 +10,4 @@ vim.opt.softtabstop = 4
 vim.opt.shiftround = true
 vim.opt.backup = true
 vim.opt.backupdir = '/home/ohnitiel/.local/state/nvim/backup/'
+vim.opt.splitright = true

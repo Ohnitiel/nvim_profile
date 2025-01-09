@@ -4,10 +4,11 @@ local job_id = 0
 
 vim.keymap.set("n", "<leader>tt", function()
     vim.cmd.vsplit()
+    vim.cmd.wincmd("l")
     vim.cmd.terminal()
 
     job_id = vim.bo.channel
-    vim.cmd.wincmd("l")
+    vim.cmd.wincmd("j")
 end)
 
 vim.keymap.set("n", "<C-g>", function()
