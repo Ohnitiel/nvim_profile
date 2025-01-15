@@ -59,9 +59,15 @@ vim.api.nvim_create_user_command("Git", function(opts)
     end
 
     if args[1] == "Commit" then
-        local message = vim.fn.input("Commit message: ")
-        vim.fn.chansend(job_id, { "git commit -m \"" .. message .. "\" .\r\n" })
+        local message = args[2]
+        if message == nil then
+            message = vim.fn.input("Commit message: ")
+        end
+        vim.fn.chansend(job_id, { "git commit -m \"" .. message .. "\" \r\n" })
     end
+    vim.api.nvim_win_call(winid, function()
+        vim.cmd("norm G")
+    end)
 end, {
     nargs = 1,
     complete = function()
