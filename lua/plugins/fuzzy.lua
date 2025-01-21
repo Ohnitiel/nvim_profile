@@ -36,6 +36,5 @@ return {
         vim.keymap.set("n", "<leader>gW", function()
             builtin.grep_string({ search = vim.fn.expand("cWORD") })
         end)
-        vim.keymap.set("n", "/", builtin.current_buffer_fuzzy_find)
     end
 }
