@@ -161,14 +161,8 @@ return {
 
                 vim.bo[ev.buf].omnifunc = "v:lua.vim.lsp.omnifunc"
 
-                ---@diagnostic disable-next-line: missing-parameter
-                if client.supports_method('textDocument/definition') then
-                    vim.keymap.set("n", "grd", vim.lsp.buf.definition, { buffer = ev.buf })
-                end
-                ---@diagnostic disable-next-line: missing-parameter
-                if client.supports_method('textDocument/declaration') then
-                    vim.keymap.set("n", "grD", vim.lsp.buf.declaration, { buffer = ev.buf })
-                end
+                vim.keymap.set("n", "grd", vim.lsp.buf.definition, { buffer = ev.buf })
+                vim.keymap.set("n", "grD", vim.lsp.buf.declaration, { buffer = ev.buf })
             end
         })
     end
