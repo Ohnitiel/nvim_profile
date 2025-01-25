@@ -11,3 +11,4 @@ vim.opt.shiftround = true
 vim.opt.backup = true
 vim.opt.backupdir = os.getenv('HOME') .. '/.local/state/nvim/backup/'
 vim.opt.splitright = true
+vim.opt.hlsearch = false
