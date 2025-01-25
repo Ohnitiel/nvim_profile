@@ -25,18 +25,16 @@ end, { expr = true })
 
 vim.keymap.set("n", "<leader>sw", [[:%s/\<<C-r><C-W>\>/<C-r><C-W>/gI<Left><Left><Left>]])
 vim.keymap.set("v", "<leader>sw", function()
-    local vstart = vim.fn.getpos("'<")
-    local vend = vim.fn.getpos("'>")
+    vim.api.nvim_feedkeys(vim.api.nvim_replace_termcodes("<Esc>", true, false, true), "x", false)
+    local _, start_row, start_col, _ = unpack(vim.fn.getpos("'<"))
+    local _, end_row, end_col, _ = unpack(vim.fn.getpos("'>"))
 
-    local line_start = vstart[2]
-    local line_end = vend[2]
-    local line = vim.fn.getline(line_start, line_end)
-    if type(line) == "table" then
-        line = table.concat(line, "\\n")
-    end
-    local repl = string.gsub(line, "\\n", "\\r")
+    local lines = vim.api.nvim_buf_get_text(0, start_row - 1, start_col - 1, end_row - 1, end_col, {})
+    local selected_text = table.concat(lines, "\n")
+    local escaped_text = vim.fn.escape(selected_text, "\\/.*$^~[]")
+    escaped_text = escaped_text:gsub("\n", "\\n")
 
-    return ":%s/" .. line .. "/" .. repl .. "/gI<Left><Left><Left>"
+    return ":%s/" .. escaped_text .. "/" .. escaped_text .. "/gI<Left><Left><Left>"
 end, { expr = true })
 
 vim.keymap.set("n", "J", "mzJ`z")
