@@ -6,7 +6,7 @@ return {
 
     config = function()
         local fzf = require("fzf-lua")
-        fzf.setup()
+        fzf.setup({ "ivy" })
 
         vim.keymap.set("n", "<leader>fg", fzf.live_grep)
         vim.keymap.set("n", "<leader>rfg", fzf.live_grep_resume)
@@ -40,5 +40,9 @@ return {
         vim.keymap.set("n", "<leader>gw", fzf.grep_cword)
         vim.keymap.set("v", "<leader>gw", fzf.grep_visual)
         vim.keymap.set("n", "<leader>gW", fzf.grep_cWORD)
+
+        vim.keymap.set({ "i", "s" }, "<C-x><C-f>", function()
+            fzf.complete_path()
+        end, { silent = true })
     end
 }
