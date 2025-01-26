@@ -12,3 +12,6 @@ vim.opt.backup = true
 vim.opt.backupdir = os.getenv('HOME') .. '/.local/state/nvim/backup/'
 vim.opt.splitright = true
 vim.opt.hlsearch = false
+
+vim.p = {}
+vim.p.masonpath = os.getenv('HOME') .. '/.local/share/nvim/mason/'
