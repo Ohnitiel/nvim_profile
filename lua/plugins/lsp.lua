@@ -145,6 +145,16 @@ return {
                         },
                     },
                 })
+
+                lsp.jdtls.setup({
+                    capabilities = capabilities,
+                    init_options = {
+                        bundles = {
+                            vim.p.masonpath ..
+                            "/packages/java-debug-adapter/extension/server/com.microsoft.java.debug.plugin-*.jar"
+                        }
+                    },
+                })
             end
         }
 
