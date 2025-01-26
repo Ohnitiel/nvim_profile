@@ -36,6 +36,8 @@ dap.configurations.python = {
             local cwd = vim.fn.getcwd()
             if vim.fn.executable(cwd .. '/bin/python') == 1 then
                 return cwd .. '/bin/python'
+            elseif os.getenv("VIRTUAL_ENV") then
+                return os.getenv("VIRTUAL_ENV") .. '/bin/python'
             else
                 return '/usr/bin/python'
             end
