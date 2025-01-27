@@ -14,6 +14,7 @@ return {
                 "hrsh7th/cmp-cmdline",
                 "hrsh7th/cmp-vsnip",
                 "hrsh7th/vim-vsnip",
+                "SergioRibera/cmp-dotenv",
             },
             opts = function(_, opts)
                 opts.sources = opts.sources or {}
@@ -76,6 +77,7 @@ return {
                 {
                     { name = 'nvim_lsp' },
                     { name = 'codeium' },
+                    { name = 'dotenv' },
                 },
                 {
                     { name = 'vsnip' },
@@ -110,7 +112,7 @@ return {
             mapping = cmp.mapping.preset.cmdline(),
             sources = cmp.config.sources(
                 { { name = 'cmdline' } },
-                { { name = 'path' } }
+                { { name = 'path' }, { name = 'buffer' } }
             ),
             matching = {
                 disallow_symbol_nonprefix_matching = false,
