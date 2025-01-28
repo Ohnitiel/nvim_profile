@@ -50,11 +50,8 @@ return {
         local conform = require("conform")
         conform.setup({
             lua = { "stylua" },
-            format_on_save = {
-                timeout_ms = 500,
-                lsp_fallback = true
-            },
         })
+        vim.keymap.set("n", "F3", conform.format, { silent = true })
 
         local feedkey = function(key, mode)
             vim.api.nvim_feedkeys(vim.api.nvim_replace_termcodes(key, true, true, true), mode, true)
