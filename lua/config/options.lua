@@ -2,7 +2,6 @@ vim.opt.breakindent = true
 vim.opt.number = true
 vim.opt.relativenumber = true
 vim.opt.colorcolumn = '80'
-vim.opt.wrapmargin = 80
 vim.opt.undofile = true
 vim.opt.undodir = os.getenv('HOME') .. '/.local/state/nvim/undo/'
 vim.opt.shiftwidth = 4
