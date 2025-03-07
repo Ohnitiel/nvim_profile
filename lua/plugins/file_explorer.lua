@@ -11,6 +11,7 @@ return {
                 show_hidden = true
             }
         })
+        require("nvim-web-devicons").setup({})
 
         vim.keymap.set("n", "-", require("oil").open, { desc = "Open parent directory" })
     end

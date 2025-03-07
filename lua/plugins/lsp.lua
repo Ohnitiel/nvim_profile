@@ -37,21 +37,24 @@ return {
             "folke/lazydev.nvim",
             ft = "lua",
         },
-
     },
 
     config = function()
         require("mason").setup()
         require("lazydev").setup()
         require("codeium").setup({
-            config_path = os.getenv("HOME") .. "/.config/codeium/config.json"
+            config_path = os.getenv("HOME") .. "/.config/codeium/config.json",
         })
 
         local conform = require("conform")
         conform.setup({
-            lua = { "stylua" },
+            formatters_by_ft = {
+                lua = { "stylua" },
+            },
         })
-        vim.keymap.set("n", "F3", conform.format, { silent = true })
+        vim.keymap.set("n", "<F3>", function()
+            conform.format({ async = true, lsp_fallback = true })
+        end, {})
 
         local feedkey = function(key, mode)
             vim.api.nvim_feedkeys(vim.api.nvim_replace_termcodes(key, true, true, true), mode, true)
@@ -62,27 +65,23 @@ return {
             snippet = {
                 expand = function(args)
                     vim.fn["vsnip#anonymous"](args.body)
-                end
+                end,
             },
 
             windows = {
                 completion = cmp.config.window.bordered(),
-                documentation = cmp.config.window.bordered()
+                documentation = cmp.config.window.bordered(),
             },
 
-            sources = cmp.config.sources(
-                {
-                    { name = 'nvim_lsp' },
-                    { name = 'codeium' },
-                    { name = 'dotenv' },
-                },
-                {
-                    { name = 'vsnip' },
-                },
-                {
-                    { name = 'buffer' },
-                }
-            ),
+            sources = cmp.config.sources({
+                { name = "nvim_lsp" },
+                { name = "codeium" },
+                { name = "dotenv" },
+            }, {
+                { name = "vsnip" },
+            }, {
+                { name = "buffer" },
+            }),
 
             mapping = {
                 ["<C-n>"] = cmp.mapping.select_next_item(),
@@ -105,20 +104,17 @@ return {
             },
         })
 
-        cmp.setup.cmdline({ ':' }, {
+        cmp.setup.cmdline({ ":" }, {
             mapping = cmp.mapping.preset.cmdline(),
-            sources = cmp.config.sources(
-                { { name = 'cmdline' } },
-                { { name = 'path' }, { name = 'buffer' } }
-            ),
+            sources = cmp.config.sources({ { name = "cmdline" } }, { { name = "path" }, { name = "buffer" } }),
             matching = {
                 disallow_symbol_nonprefix_matching = false,
-            }
+            },
         })
 
-        cmp.setup.cmdline({ '/', '?' }, {
+        cmp.setup.cmdline({ "/", "?" }, {
             mapping = cmp.mapping.preset.cmdline(),
-            sources = { { name = 'buffer' } },
+            sources = { { name = "buffer" } },
         })
 
         local lsp = require("lspconfig")
@@ -127,7 +123,7 @@ return {
         local handlers = {
             function(server)
                 lsp[server].setup({
-                    capabilities = capabilities
+                    capabilities = capabilities,
                 })
 
                 lsp.lua_ls.setup({
@@ -138,8 +134,8 @@ return {
                                 globals = { "vim" },
                                 disable = {
                                     "missing-parameters",
-                                    "missing-fields"
-                                }
+                                    "missing-fields",
+                                },
                             },
                         },
                     },
@@ -149,31 +145,32 @@ return {
                     capabilities = capabilities,
                     init_options = {
                         bundles = {
-                            vim.p.masonpath ..
-                            "/packages/java-debug-adapter/extension/server/com.microsoft.java.debug.plugin-*.jar"
-                        }
+                            vim.p.masonpath
+                                .. "/packages/java-debug-adapter/extension/server/com.microsoft.java.debug.plugin-*.jar",
+                        },
                     },
                 })
-            end
+            end,
         }
 
         require("mason-lspconfig").setup({
-            ensure_installed = { 'lua_ls' },
+            ensure_installed = { "lua_ls" },
             handlers = handlers,
-            automatic_installation = false
+            automatic_installation = false,
         })
-
 
         vim.api.nvim_create_autocmd("LSPAttach", {
             callback = function(ev)
                 local client = vim.lsp.get_client_by_id(ev.data.client_id)
-                if not client then return end
+                if not client then
+                    return
+                end
 
                 vim.bo[ev.buf].omnifunc = "v:lua.vim.lsp.omnifunc"
 
                 vim.keymap.set("n", "grd", vim.lsp.buf.definition, { buffer = ev.buf })
                 vim.keymap.set("n", "grD", vim.lsp.buf.declaration, { buffer = ev.buf })
-            end
+            end,
         })
-    end
+    end,
 }
