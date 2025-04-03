@@ -46,10 +46,19 @@ return {
             config_path = os.getenv("HOME") .. "/.config/codeium/config.json",
         })
 
+        local home = os.getenv("HOME")
+        local masonpath = home .. "/.local/share/nvim/mason/bin/"
         local conform = require("conform")
         conform.setup({
+            log_level = vim.log.levels.DEBUG,
+            formatters = {
+                sqruff = {
+                    cwd = require("conform.util").root_file({".sqruff"}),
+                },
+            },
             formatters_by_ft = {
                 lua = { "stylua" },
+                sql = { "sqruff" },
             },
         })
         vim.keymap.set("n", "<F3>", function()
@@ -126,6 +135,11 @@ return {
                     capabilities = capabilities,
                 })
 
+                lsp.sqls.setup({
+                    capabilities = capabilities,
+                    cmd = { masonpath .. "sqls", "-config", "~/database/aghu/sqls_config.yml" },
+                })
+
                 lsp.lua_ls.setup({
                     capabilities = capabilities,
                     settings = {
@@ -146,7 +160,7 @@ return {
                     init_options = {
                         bundles = {
                             vim.p.masonpath
-                                .. "/packages/java-debug-adapter/extension/server/com.microsoft.java.debug.plugin-*.jar",
+                            .. "/packages/java-debug-adapter/extension/server/com.microsoft.java.debug.plugin-*.jar",
                         },
                     },
                 })
