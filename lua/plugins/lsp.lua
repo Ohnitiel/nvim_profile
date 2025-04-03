@@ -4,6 +4,8 @@ return {
         "williamboman/mason.nvim",
         "williamboman/mason-lspconfig.nvim",
         "stevearc/conform.nvim",
+        "nanotee/sqls.nvim",
+        "sqls-server/sqls.vim",
 
         {
             "hrsh7th/nvim-cmp",
