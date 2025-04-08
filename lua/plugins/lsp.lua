@@ -4,8 +4,6 @@ return {
         "williamboman/mason.nvim",
         "williamboman/mason-lspconfig.nvim",
         "stevearc/conform.nvim",
-        "nanotee/sqls.nvim",
-        "sqls-server/sqls.vim",
 
         {
             "hrsh7th/nvim-cmp",
@@ -60,7 +58,6 @@ return {
             },
             formatters_by_ft = {
                 lua = { "stylua" },
-                sql = { "sqruff" },
             },
         })
         vim.keymap.set("n", "<F3>", function()
@@ -135,11 +132,6 @@ return {
             function(server)
                 lsp[server].setup({
                     capabilities = capabilities,
-                })
-
-                lsp.sqls.setup({
-                    capabilities = capabilities,
-                    cmd = { masonpath .. "sqls", "-config", "~/database/aghu/sqls_config.yml" },
                 })
 
                 lsp.lua_ls.setup({
