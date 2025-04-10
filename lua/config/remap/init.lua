@@ -48,3 +48,5 @@ vim.keymap.set("n", "[m", "[mzzzv")
 vim.keymap.set("n", "]m", "]mzzzv")
 vim.keymap.set("n", "[M", "[Mzzzv")
 vim.keymap.set("n", "]M", "]Mzzzv")
+
+vim.keymap.set("n", "<leader>tb", vim.cmd.tabnew)
