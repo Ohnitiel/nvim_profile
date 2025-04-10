@@ -4,7 +4,7 @@ return {
         require("md_presentation").setup({
             title_separator = "^# ",
             slide_separator = "^## ",
-            step_separator = "^\t?+```",
+            step_separator = "",
         })
     end,
 }
