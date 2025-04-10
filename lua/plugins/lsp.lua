@@ -55,9 +55,13 @@ return {
                 sqruff = {
                     cwd = require("conform.util").root_file({".sqruff"}),
                 },
+                pg_format = {
+                    append_args = { "-f", "2", "-L", "-s", "2", "-U", "2" },
+                },
             },
             formatters_by_ft = {
                 lua = { "stylua" },
+                sql = { "pg_format" },
             },
         })
         vim.keymap.set("n", "<F3>", function()
