@@ -15,4 +15,4 @@ vim.opt.hlsearch = false
 vim.p = {}
 vim.p.masonpath = os.getenv('HOME') .. '/.local/share/nvim/mason/'
 
-vim.api.nvim_set_hl(0, 'NormalFloat', { bg = 'NONE' } )
+vim.api.nvim_set_hl(0, 'Normal', { bg = 'NONE' } )
