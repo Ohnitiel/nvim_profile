@@ -41,7 +41,9 @@ return {
 
     config = function()
         require("mason").setup()
-        require("lazydev").setup()
+        require("lazydev").setup({
+            library = { "nvim-dap-ui" }
+        })
         require("codeium").setup({
             config_path = os.getenv("HOME") .. "/.config/codeium/config.json",
         })

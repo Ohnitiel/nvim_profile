@@ -3,6 +3,7 @@ return {
 
     dependencies = {
         "theHamsta/nvim-dap-virtual-text",
-        "igorlfs/nvim-dap-view",
+        -- "igorlfs/nvim-dap-view",
+        "rcarriga/nvim-dap-ui",
     },
 }
