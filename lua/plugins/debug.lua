@@ -2,12 +2,11 @@ return {
     "mfussenegger/nvim-dap",
 
     dependencies = {
-        "sontungexpt/better-diagnostic-virtual-text",
+        "theHamsta/nvim-dap-virtual-text",
+        "igorlfs/nvim-dap-view",
     },
 
     config = function()
-        require("better-diagnostic-virtual-text").setup({
-            inline = true
-        })
+        require("nvim-dap-virtual-text").setup()
     end
 }
