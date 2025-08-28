@@ -62,6 +62,7 @@ return {
             formatters_by_ft = {
                 lua = { "stylua" },
                 sql = { "pg_format" },
+                go = { "gofumpt" },
             },
         })
         vim.keymap.set("n", "<F3>", function()
