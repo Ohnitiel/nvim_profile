@@ -4,6 +4,12 @@ return {
     dependencies = {
         "theHamsta/nvim-dap-virtual-text",
         -- "igorlfs/nvim-dap-view",
-        "rcarriga/nvim-dap-ui",
+        {
+            "rcarriga/nvim-dap-ui",
+            dependencies = {
+                "nvim-neotest/nvim-nio"
+            },
+            config = true
+        },
     },
 }
