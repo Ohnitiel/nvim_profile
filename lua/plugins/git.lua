@@ -3,4 +3,9 @@ vim.pack.add(
     { confirm = false }
 )
 
-require("vgit").setup()
+local vgit = require("vgit")
+vgit.setup()
+vim.cmd([[VGit toggle_live_blame]])
+
+vim.keymap.set("n", "<leader>gd", vgit.project_diff_preview)
+vim.keymap.set("n", "<leader>gb", vgit.toggle_live_blame)

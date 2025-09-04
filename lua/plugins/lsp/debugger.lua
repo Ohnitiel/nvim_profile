@@ -35,7 +35,10 @@ vim.pack.add(
 require("dapui").setup()
 require("nvim-dap-virtual-text").setup()
 require("lazydev").setup({
-    library = { "nvim-dap-ui" },
+    library = {
+        "nvim-dap-ui",
+        vim.api.nvim_get_runtime_file("lua", true),
+    },
 })
 
 local dap, dapui = require("dap"), require("dapui")

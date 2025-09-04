@@ -24,4 +24,17 @@ vim.pack.add({ "https://github.com/rafamadriz/friendly-snippets", })
 
 require("blink.cmp").setup({
     cmdline = { enabled = true },
+    sources = {
+        per_filetype = {
+            lua = { inherit_defaults = true, 'lazydev' }
+        },
+        providers = {
+            lazydev = {
+                name = "LazyDev",
+                module = "lazydev.integrations.blink",
+                score_offset = 100,
+                enabled = true
+            },
+        },
+    },
 })
