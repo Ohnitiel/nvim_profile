@@ -1,6 +1,7 @@
 require("plugins.lsp.autocomplete")
 require("plugins.lsp.formatter")
 require("plugins.lsp.debugger")
+require("plugins.lsp.jdtls")
 
 vim.api.nvim_create_autocmd("LSPAttach", {
     callback = function(ev)
@@ -15,3 +16,7 @@ vim.api.nvim_create_autocmd("LSPAttach", {
         vim.keymap.set("n", "grD", vim.lsp.buf.declaration, { buffer = ev.buf })
     end,
 })
+
+vim.lsp.enable("luals")
+vim.lsp.enable("jdtls")
+vim.lsp.enable("ty")
