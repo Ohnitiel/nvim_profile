@@ -15,10 +15,54 @@ vim.lsp.config("jdtls", {
         "/opt/lsp/jdtls/bin/jdtls",
         "-data", workspace_dir
     },
+    capabilities = {
+        textDocument = {
+            completion = { dynamicRegistration = false },
+            hover = { dynamicRegistration = false } ,
+        }
+    },
     filetypes = { "java" },
     settings = {
         java = {
+
+            implementationCodeLens = { enabled = false },
+            referencesCodeLens = { enabled = false },
+            references = { includeDecompiledSources = false },
+            inlayHints = {
+                parameterNames = { enabled = 'none' },
+            },
+            signatureHelp = { enabled = true },
+            contentProvider = { preferred = 'fernflower' },
+
+            maven = {
+                downloadSources = false,
+                updateSnapshots = false
+            },
+
+            codeGeneration = {
+                toString = {
+                    template = '${object.className} [IGNORED]',
+                    enabled = false,
+                },
+                hashCodeEquals = { useJava7Objects = false, enabled = false },
+                useBlocks = false
+            },
+
+            completion = { enabled = false, },
+
+            saveActions = { organizeImports = false },
+
+            templates = {
+                fileHeader = {},
+                typeComment = {},
+            },
+
+            format = { enabled = false },
+
+            organizeImports = { starThreshold = 99, staticStarThreshold = 99 },
+            
             configuration = {
+                updateBuildConfiguration = 'disabled',
                 runtimes = {
                     {
                         name = "JavaSE-1.8",
@@ -28,10 +72,11 @@ vim.lsp.config("jdtls", {
             },
         },
     },
-    init_options = {
-        bundles = {
-            vim.fn.glob(
-                "/opt/dap/java-debug/com.microsoft.java.debug.plugin/target/com.microsoft.java.debug.plugin-*.jar")
-        }
-    },
+    root_dir = vim.loop.cwd(),
+    -- init_options = {
+    --     bundles = {
+    --         vim.fn.glob(
+    --             "/opt/dap/java-debug/com.microsoft.java.debug.plugin/target/com.microsoft.java.debug.plugin-*.jar")
+    --     }
+    -- },
 })
