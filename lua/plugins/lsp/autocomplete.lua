@@ -1,19 +1,11 @@
 vim.api.nvim_create_autocmd("PackChanged", {
     desc = "Build blink.cmp fuzzy finder",
-    callback = function(args)
-        -- local spec = args.data.spec
-        -- local events = { update = true, install = true, delete = false }
-        -- if not spec or spec.name ~= "blink.cmp" then
-        --     return
-        -- end
-        -- if events[args.data.kind] then
-        --     vim.notify("blink.cmp updated, building fuzzy finder")
-        --     vim.schedule(function()
-        --         local source_dir = args.data.path
-        --         os.execute("cargo build --release --target-dir" .. source_dir)
-        --     end)
-        -- end
-        vim.cmd("[[ BlinkCmp build ]]")
+    callback = function(ev)
+        local name, kind = ev.data.spec.name, ev.data.kind
+
+        if name == "blink.cmp" and (kind == "install" or kind == "update") then
+            vim.cmd("[[ BlinkCmp build ]]")
+        end
     end,
 })
 
@@ -22,8 +14,17 @@ vim.pack.add(
     { confirm = false, }
 )
 vim.pack.add({ "https://github.com/rafamadriz/friendly-snippets", })
+vim.pack.add(
+    { {
+        src = "https://github.com/monkoose/neocodeium",
+    } },
+    { confirm = false, }
+)
 
-require("blink.cmp").setup({
+local cmp = require("blink.cmp")
+local ai = require("neocodeium")
+
+cmp.setup({
     cmdline = { enabled = true },
     sources = {
         per_filetype = {
@@ -38,4 +39,27 @@ require("blink.cmp").setup({
             },
         },
     },
+    completion = {
+        menu = {
+            auto_show = function(ctx)
+                return ctx.mode ~= 'default'
+            end,
+        },
+    },
 })
+
+vim.api.nvim_create_autocmd('User', {
+    pattern = "BlinkCmpMenuOpen",
+    callback = function()
+        ai.clear()
+    end,
+})
+
+ai.setup({
+    filter = function()
+        return not cmp.is_visible()
+    end
+})
+vim.keymap.set("i", "<A-f>", ai.accept)
+vim.keymap.set("i", "<A-c>", ai.clear)
+vim.keymap.set("i", "<A-n>", ai.cycle)
