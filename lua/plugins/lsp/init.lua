@@ -20,4 +20,5 @@ vim.api.nvim_create_autocmd("LSPAttach", {
 vim.lsp.enable("luals")
 vim.lsp.enable("jdtls")
 vim.lsp.enable("ty")
--- vim.lsp.enable("ruff")
+vim.lsp.enable("ruff")
+vim.lsp.enable("gopls")
