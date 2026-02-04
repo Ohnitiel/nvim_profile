@@ -9,8 +9,10 @@ vim.pack.add(
 
 require("oil").setup({
     view_options = {
-        show_hidden = true
-    }
+        show_hidden = true,
+        case_sensitive = true,
+        natural = false,
+    },
 })
 require("nvim-web-devicons").setup()
 

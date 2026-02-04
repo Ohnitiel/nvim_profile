@@ -12,11 +12,16 @@ fmt.setup({
         },
         gofumpt = {
             command = "/opt/formatter/gofumpt"
-        }
+        },
     },
-    formatter_by_ft = {
+    formatters_by_ft = {
         lua = { "stylua" },
         go = { "gofumpt" },
+        python = {
+            "ruff_fix",
+            "ruff_format",
+            "ruff_organize_imports",
+        },
     },
 })
 
