@@ -13,10 +13,17 @@ fmt.setup({
         gofumpt = {
             command = "/opt/formatter/gofumpt"
         },
+        prettierd = {
+            command = "prettierd"
+        }
     },
     formatters_by_ft = {
         lua = { "stylua" },
         go = { "gofumpt" },
+        javascript = { "prettierd" },
+        typescript = { "prettierd" },
+        html = { "prettierd" },
+        css = { "prettierd"},
         python = {
             "ruff_fix",
             "ruff_format",

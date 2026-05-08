@@ -2,6 +2,7 @@ require("plugins.lsp.autocomplete")
 require("plugins.lsp.formatter")
 require("plugins.lsp.debugger")
 require("plugins.lsp.jdtls")
+require("plugins.lsp.ts-tools")
 
 vim.api.nvim_create_autocmd("LSPAttach", {
     callback = function(ev)
@@ -22,3 +23,5 @@ vim.lsp.enable("jdtls")
 vim.lsp.enable("ty")
 vim.lsp.enable("ruff")
 vim.lsp.enable("gopls")
+vim.lsp.enable("tsls")
+vim.lsp.enable("phpactor")
