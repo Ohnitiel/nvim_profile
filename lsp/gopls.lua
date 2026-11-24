@@ -1,5 +1,5 @@
 return {
-    cmd = { vim.fs.abspath("~/go/bin/gopls") },
+    cmd = { vim.p.masonpath .. "bin/gopls" },
     filetypes = { "go" },
     settings = {
         gopls = { gofumpt = true },

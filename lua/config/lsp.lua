@@ -1,8 +1,5 @@
-require("plugins.lsp.autocomplete")
-require("plugins.lsp.formatter")
-require("plugins.lsp.debugger")
-require("plugins.lsp.jdtls")
-require("plugins.lsp.ts-tools")
+require("mason").setup()
+require("swapson").setup()
 
 vim.api.nvim_create_autocmd("LSPAttach", {
     callback = function(ev)
@@ -15,13 +12,13 @@ vim.api.nvim_create_autocmd("LSPAttach", {
 
         vim.keymap.set("n", "grd", vim.lsp.buf.definition, { buffer = ev.buf })
         vim.keymap.set("n", "grD", vim.lsp.buf.declaration, { buffer = ev.buf })
+	vim.keymap.set("n", "grr", require("telescope.builtin").lsp_references)
+
     end,
 })
 
-vim.lsp.enable("luals")
-vim.lsp.enable("jdtls")
-vim.lsp.enable("ty")
-vim.lsp.enable("ruff")
+vim.lsp.enable("docker")
+vim.lsp.enable("html")
 vim.lsp.enable("gopls")
-vim.lsp.enable("tsls")
-vim.lsp.enable("phpactor")
+vim.lsp.enable("laravel")
+vim.lsp.enable("luals")

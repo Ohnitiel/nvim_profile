@@ -1,0 +1,5 @@
+require("config.autocomplete")
+require("config.fuzzy")
+require("config.lsp")
+require("config.treesitter")
+require("config.ui")

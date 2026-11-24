@@ -1,11 +1,11 @@
 vim.g.mapleader = " "
 
-vim.keymap.set("n", "-", vim.cmd.Ex)
 vim.keymap.set("n", "<leader>q", vim.cmd.quit)
 vim.keymap.set("n", "<leader>w", vim.cmd.write)
 
+vim.keymap.set("n", "<leader>y", ":% y +<CR>")
 vim.keymap.set("v", "<leader>y", [["+y]])
-vim.keymap.set("n", "<leader>Y", [[:% y +<CR>]])
+
 vim.keymap.set("v", "p", [["_dP]])
 
 vim.keymap.set("v", "K", function()
@@ -23,16 +23,10 @@ vim.keymap.set("v", "J", function()
     return ":'<,'>m '>+" .. count .. "<CR>gv=gv"
 end, { expr = true })
 
+
 vim.keymap.set("n", "<leader>sw", [[:%s/\<<C-r><C-W>\>/<C-r><C-W>/gI<Left><Left><Left>]])
 vim.keymap.set("v", "<leader>sw", function()
-    vim.api.nvim_feedkeys(vim.api.nvim_replace_termcodes("<Esc>", true, false, true), "x", false)
-    local _, start_row, start_col, _ = unpack(vim.fn.getpos("'<"))
-    local _, end_row, end_col, _ = unpack(vim.fn.getpos("'>"))
-
-    local lines = vim.api.nvim_buf_get_text(0, start_row - 1, start_col - 1, end_row - 1, end_col, {})
-    local selected_text = table.concat(lines, "\n")
-    local escaped_text = vim.fn.escape(selected_text, "\\/.*$^~[]")
-    escaped_text = escaped_text:gsub("\n", "\\n")
+    local escaped_text = get_visual_selection()
 
     return ":%s/" .. escaped_text .. "/" .. escaped_text .. "/gI<Left><Left><Left>"
 end, { expr = true })
